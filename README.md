@@ -8,7 +8,18 @@ If you are using motionEAP in your research-related documents, it is recommended
 
 ## How to cite motionEAP
 
-Below is the BibTex entry to cite motionEAP
+Below are the BibTex entries to cite motionEAP
+
+<pre>
+@misc{Weber:2014,
+  author = {Markus Funk, Thomas Kosch, Sven Mayer},
+  title = {motionEAP},
+  year = {2016},
+  publisher = {GitHub},
+  journal = {GitHub repository},
+  howpublished = {\url{https://github.com/hcilab-org/motionEAP/}}
+}
+</pre>
 
 <pre>
 @inproceedings{funk2016motioneap,
