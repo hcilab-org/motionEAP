@@ -11,7 +11,7 @@ If you are using motionEAP in your research-related documents, it is recommended
 Below are the BibTex entries to cite motionEAP
 
 <pre>
-@misc{Weber:2014,
+@misc{Funk:2016,
   author = {Markus Funk, Thomas Kosch, Sven Mayer},
   title = {motionEAP},
   year = {2016},
