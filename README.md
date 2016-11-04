@@ -1,6 +1,6 @@
 # motionEAP
 
-The motionEAP project aims to augment workplaces with projections to support workers during manual assembly tasks. Using a depth sensor, motionEAP is able to deliver appropriate feedback regarding the current assembly step. Correct or wrong assembly steps as well as picks from bins are detected using image processing algorithms.
+The motionEAP project aims to augment workplaces with in-situ projection to support workers during manual assembly tasks. Using a depth-sensor, motionEAP is able to deliver appropriate feedback regarding the current assembly step. Correct or wrong assembly steps as well as picks from bins are detected using image processing algorithms.
 
 ## Why citing motionEAP
 
@@ -8,7 +8,7 @@ If you are using motionEAP in your research-related documents, it is recommended
 
 ## How to cite motionEAP
 
-Below is the BibTex entry for citing motionEAP
+Below is the BibTex entry to cite motionEAP
 
 <pre>
 @inproceedings{funk2016motioneap,
