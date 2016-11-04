@@ -1,0 +1,9 @@
+diff a/motionEAPAdmin/GUI/AdminView.xaml.cs b/motionEAPAdmin/GUI/AdminView.xaml.cs	(rejected hunks)
+@@ -235,7 +235,6 @@
+                 m_GUI_BoxesPanel.DrawColorFrame(pColorImage);
+             }
+ 
+-            m_GUI_PBDPanel.checkIfUserIsWorking(pColorImageCroped);
+             QRDetectManager.Instance.SimpleScan(pColorImageCroped);
+         }
+ 

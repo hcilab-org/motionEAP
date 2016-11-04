@@ -1,0 +1,24 @@
+﻿<Window
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
+    xmlns:vali="clr-namespace:motionEAPAdmin.GUI.ValidationRules"
+    xmlns:helpers="clr-namespace:motionEAPAdmin.Localization"
+    xmlns:GUI="clr-namespace:motionEAPAdmin.GUI"
+    x:Class="motionEAPAdmin.GUI.Dialog.SceneEditorDialog"
+    Title="SceneEditorDialog" Height="500" Width="700">
+
+    <Window.Resources>
+        <helpers:LocalizationHelper x:Key="localization"/>
+    </Window.Resources>
+    <DockPanel>
+        <Menu DockPanel.Dock="Top">
+            <MenuItem Header="{Binding .[Strings.menuItemScenes], FallbackValue=#Scenes, Source={StaticResource localization}}">
+                <MenuItem Header="{Binding .[Strings.menuItemNewScene], FallbackValue=#New Scene, Source={StaticResource localization}}" Click="buttonNewScene_Click" />
+                <MenuItem Header="{Binding .[Strings.menuItemLoadScene], FallbackValue=#Load Scene, Source={StaticResource localization}}" Click="buttonLoadScene_Click"/>
+                <MenuItem Header="{Binding .[Strings.menuItemSaveScene], FallbackValue=#Save Scene, Source={StaticResource localization}}" Click="buttonSaveScene_Click"/>
+            </MenuItem>
+        </Menu>
+        <GUI:EditorPanel x:Name="m_EditorPanel"/>
+    </DockPanel>
+</Window>

@@ -1,0 +1,129 @@
+// <copyright file=CsvReader.cs
+// <copyright>
+//  Copyright (c) 2016, University of Stuttgart
+//  Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the Software),
+//  to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense,
+//  and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+//  The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+//  THE SOFTWARE IS PROVIDED AS IS, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+//  FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM,
+//  DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE
+//  OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+// </copyright>
+// <license>MIT License</license>
+// <main contributors>
+//  Markus Funk, Thomas Kosch, Michael Matheis, Sven Mayer
+// </main contributors>
+// <co-contributors>
+//  Paul Brombosch, Mai El-Komy, Juana Heusler, 
+//  Matthias Hoppe, Robert Konrad, Alexander Martin
+// </co-contributors>
+// <patent information>
+//  We are aware that this software implements patterns and ideas,
+//  which might be protected by patents in your country.
+//  Example patents in Germany are:
+//      Patent reference number: DE 103 20 557.8
+//      Patent reference number: DE 10 2013 220 107.9
+//  Please make sure when using this software not to violate any existing patents in your country.
+// </patent information>
+// <date> 11/2/2016 12:25:57 PM</date>
+
+using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Dp.InterfacesAndDataModel.CSV
+{
+    public class CsvReader : StreamReader
+    {
+        public CsvReader(Stream stream)
+            : base(stream)
+        {
+        }
+
+        public CsvReader(string filename)
+            : base(filename)
+        {
+        }
+
+        /// <summary>
+        /// Reads a row of data from a CSV file
+        /// </summary>
+        /// <param name="row"></param>
+        /// <returns></returns>
+        public bool ReadRow(List<String> row)
+        {
+            String LineText = ReadLine();
+            if (String.IsNullOrEmpty(LineText))
+                return false;
+
+            int pos = 0;
+            int rows = 0;
+
+            while (pos < LineText.Length)
+            {
+                string value;
+
+                // Special handling for quoted field
+                if (LineText[pos] == '"')
+                {
+                    // Skip initial quote
+                    pos++;
+
+                    // Parse quoted value
+                    int start = pos;
+                    while (pos < LineText.Length)
+                    {
+                        // Test for quote character
+                        if (LineText[pos] == '"')
+                        {
+                            // Found one
+                            pos++;
+
+                            // If two quotes together, keep one
+                            // Otherwise, indicates end of value
+                            if (pos >= LineText.Length || LineText[pos] != '"')
+                            {
+                                pos--;
+                                break;
+                            }
+                        }
+                        pos++;
+                    }
+                    value = LineText.Substring(start, pos - start);
+                    value = value.Replace("\"\"", "\"");
+                }
+                else
+                {
+                    // Parse unquoted value
+                    int start = pos;
+                    while (pos < LineText.Length && LineText[pos] != ',')
+                        pos++;
+                    value = LineText.Substring(start, pos - start);
+                }
+
+                // Add field to list
+                if (rows < row.Count)
+                    row[rows] = value;
+                else
+                    row.Add(value);
+                rows++;
+
+                // Eat up to and including next comma
+                while (pos < LineText.Length && LineText[pos] != ',')
+                    pos++;
+                if (pos < LineText.Length)
+                    pos++;
+            }
+            // Delete any unused items
+            while (row.Count > rows)
+                row.RemoveAt(rows);
+
+            // Return true if any columns read
+            return (row.Count > 0);
+        }
+    }
+}

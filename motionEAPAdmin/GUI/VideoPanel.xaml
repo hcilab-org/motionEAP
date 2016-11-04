@@ -1,0 +1,43 @@
+﻿<UserControl x:Class="motionEAPAdmin.GUI.VideoPanel"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
+             mc:Ignorable="d"
+             xmlns:helpers="clr-namespace:motionEAPAdmin.Localization"
+             d:DesignHeight="600" Width="1234.621">
+
+    <UserControl.Resources>
+        <helpers:LocalizationHelper x:Key="localization"/>
+    </UserControl.Resources>
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <StackPanel Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2"  Orientation="Horizontal" Margin="5,5,5,5" HorizontalAlignment="Right">
+            <ComboBox x:Name="m_ComboBoxSelectedCameras" VerticalAlignment="Top" Width="200" RenderTransformOrigin="-0.121,-1.345" Height="21" Margin="0,9,0,0" x:FieldModifier="public" SelectionChanged="m_ComboBoxSelectedCameras_SelectionChanged" HorizontalAlignment="Right"/>
+        </StackPanel>
+
+        <Viewbox Grid.Row="1" Grid.Column="0" Margin="5,5,5,5">
+            <Image x:Name="KinectRGBImage" x:FieldModifier="protected" />
+        </Viewbox>
+        <Viewbox Grid.Row="1" Grid.Column="1" Margin="5,5,5,5">
+            <Image x:Name="KinectDepthImage" x:FieldModifier="protected" />
+        </Viewbox>
+        <Viewbox Grid.Row="2" Grid.Column="0" Margin="5,5,5,5">
+            <Image x:Name="KinectRGBCropImage" x:FieldModifier="protected" />
+        </Viewbox>
+        <Viewbox Grid.Row="2" Grid.Column="1" Margin="5,5,5,5">
+            <Image x:Name="KinectDepthCropImage" x:FieldModifier="protected" />
+        </Viewbox>
+    </Grid>
+</UserControl>

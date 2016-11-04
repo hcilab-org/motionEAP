@@ -1,0 +1,61 @@
+﻿<UserControl
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:helpers="clr-namespace:motionEAPAdmin.Localization"
+             xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit" x:Class="motionEAPAdmin.GUI.BoxesPanel" 
+             mc:Ignorable="d"
+             d:DesignHeight="600" d:DesignWidth="800">
+
+    <UserControl.Resources>
+        <helpers:LocalizationHelper x:Key="localization"/>
+    </UserControl.Resources>
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="250"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="40"/>
+        </Grid.RowDefinitions>
+
+        <StackPanel x:Name="m_TopBar" x:FieldModifier="protected" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2"  Orientation="Horizontal" Margin="5,5,5,5">
+            <CheckBox Margin="5,5,5,5" IsChecked="{Binding BoxesVisualFeedbackDisplay, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Content="{Binding .[Strings.checkboxDisplayVisualFeedback], FallbackValue=#Display visual feedback, Source={StaticResource localization}}"  VerticalContentAlignment="Center"/>
+            <CheckBox Margin="5,5,5,5" IsChecked="{Binding BoxesVisualFeedbackProject, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Content="{Binding .[Strings.checkboxProjectVisualFeedback], FallbackValue=#Project visual feedback, Source={StaticResource localization}}" VerticalContentAlignment="Center"/>
+            <Button Margin="5,5,5,5" Content="{Binding .[Strings.buttonSaveBoxLayout], FallbackValue=#Save box layout, Source={StaticResource localization}}" Click="buttonSaveBoxLayout_Click" />
+            <Button Margin="5,5,5,5" Content="{Binding .[Strings.buttonLoadBoxLayout], FallbackValue=#Load box layout, Source={StaticResource localization}}" Click="buttonLoadBoxLayout_Click" />
+            <Label  Margin="5,5,5,5" Content="{Binding .[Strings.labelName], FallbackValue=#Name, Source={StaticResource localization}}"  VerticalContentAlignment="Center"/>
+            <TextBox x:Name="m_TextBoxLayoutName" x:FieldModifier="protected" Margin="5,5,5,5" Width="150" />
+        </StackPanel>
+
+        <Viewbox Grid.Row="1" Grid.Column="0" x:Name="imageViewbox" x:FieldModifier="protected" Margin="5,5,5,36" MouseMove="image_MouseMove" MouseUp="image_MouseUp" MouseLeftButtonDown="image_MouseDown">
+            <Image x:Name="image" x:FieldModifier="protected" />
+        </Viewbox>
+        <DockPanel Grid.Row="1" Grid.Column="1">
+            <ListBox x:Name="m_LstBoxBoxes" Margin="5,5,5,5" ItemsSource="{Binding Boxes, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" >
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock Text="{Binding NameWithPercentage}" Width="100" >
+                            <TextBlock.ContextMenu>
+                                <ContextMenu>
+                                    <MenuItem Header ="{Binding .[Strings.menuItemEditCustomScene], FallbackValue=#EditCustomScene, Source={StaticResource localization}}" Click="MenuItem_EditCustomScene"/>
+                                    <MenuItem Header ="{Binding .[Strings.menuItemEdit], FallbackValue=#Edit, Source={StaticResource localization}}" Click="MenuItem_EditSelectedBox"/>
+                                    <MenuItem Header ="{Binding .[Strings.menuItemDelete], FallbackValue=#Delete, Source={StaticResource localization}}" Click="MenuItem_DeleteSelectedBox"/>
+                                </ContextMenu>
+                            </TextBlock.ContextMenu>
+                        </TextBlock>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+        </DockPanel>
+        <StackPanel x:Name="m_ButtomBar" Grid.Row="3" Grid.Column="0" Orientation="Horizontal">
+            <Label Margin="5,5,5,5" Content="{Binding .[Strings.labelPercentWithinBoundTrigger], FallbackValue=#% to trigger:, Source={StaticResource localization}}"/>
+            <xctk:IntegerUpDown Grid.Row="1" Margin="5,5,5,5" Width="50" Value="{Binding BoxesInputTriggerPercentage, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+        </StackPanel>
+
+    </Grid>
+</UserControl>

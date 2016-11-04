@@ -1,0 +1,645 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="buttonCircle" xml:space="preserve">
+    <value>Circle</value>
+  </data>
+  <data name="buttonDelete" xml:space="preserve">
+    <value>Delete</value>
+  </data>
+  <data name="buttonDetectZone" xml:space="preserve">
+    <value>Detect zone</value>
+  </data>
+  <data name="buttonDown" xml:space="preserve">
+    <value>Forward</value>
+  </data>
+  <data name="buttonFilter" xml:space="preserve">
+    <value>Filter</value>
+  </data>
+  <data name="buttonFindID" xml:space="preserve">
+    <value>Find ID</value>
+  </data>
+  <data name="buttonImage" xml:space="preserve">
+    <value>Image</value>
+  </data>
+  <data name="buttonLoad" xml:space="preserve">
+    <value>Load</value>
+  </data>
+  <data name="buttonLoadAssemblyZone" xml:space="preserve">
+    <value>Load assembly zone</value>
+  </data>
+  <data name="buttonLoadBoxLayout" xml:space="preserve">
+    <value>Load box layout</value>
+  </data>
+  <data name="buttonLoadDetectionZoneLayout" xml:space="preserve">
+    <value>Load detection zone layout</value>
+  </data>
+  <data name="buttonLoadScene" xml:space="preserve">
+    <value>Load scene</value>
+  </data>
+  <data name="buttonNewScene" xml:space="preserve">
+    <value>New scene</value>
+  </data>
+  <data name="buttonPlay2DRecord" xml:space="preserve">
+    <value>Play 2D record</value>
+  </data>
+  <data name="buttonPlay3DRecord" xml:space="preserve">
+    <value>Play 3D record</value>
+  </data>
+  <data name="buttonQuitAssembly" xml:space="preserve">
+    <value>Quit assembly</value>
+  </data>
+  <data name="buttonRecord2DGesture" xml:space="preserve">
+    <value>Record 2D gesture</value>
+  </data>
+  <data name="buttonRecord3DGesture" xml:space="preserve">
+    <value>Record 3D gesture</value>
+  </data>
+  <data name="buttonRecord3DProfile" xml:space="preserve">
+    <value>Record 3D profile</value>
+  </data>
+  <data name="buttonRectangle" xml:space="preserve">
+    <value>Rectangle</value>
+  </data>
+  <data name="buttonRemove" xml:space="preserve">
+    <value>Remove</value>
+  </data>
+  <data name="buttonRotation" xml:space="preserve">
+    <value>Rotation</value>
+  </data>
+  <data name="buttonSave" xml:space="preserve">
+    <value>Save</value>
+  </data>
+  <data name="buttonSaveAssemblyZone" xml:space="preserve">
+    <value>Save assembly zone</value>
+  </data>
+  <data name="buttonSaveBoxLayout" xml:space="preserve">
+    <value>Save box layout</value>
+  </data>
+  <data name="buttonSaveDetectionZoneLayout" xml:space="preserve">
+    <value>Save detection zone layout</value>
+  </data>
+  <data name="buttonSaveScene" xml:space="preserve">
+    <value>Save scene</value>
+  </data>
+  <data name="buttonScanObjects" xml:space="preserve">
+    <value>Scan object</value>
+  </data>
+  <data name="buttonScreenshot" xml:space="preserve">
+    <value>Screenshot</value>
+  </data>
+  <data name="buttonSnapshot" xml:space="preserve">
+    <value>Snapshot</value>
+  </data>
+  <data name="buttonStartAssembly" xml:space="preserve">
+    <value>Start assembly</value>
+  </data>
+  <data name="buttonStartRecording" xml:space="preserve">
+    <value>Start recording</value>
+  </data>
+  <data name="buttonStartRecordingVideo" xml:space="preserve">
+    <value>Start recording video</value>
+  </data>
+  <data name="buttonStopRecording" xml:space="preserve">
+    <value>Stop recording</value>
+  </data>
+  <data name="buttonStopRecordingVideo" xml:space="preserve">
+    <value>Stop recording video</value>
+  </data>
+  <data name="buttonText" xml:space="preserve">
+    <value>Text</value>
+  </data>
+  <data name="buttonTextViewer" xml:space="preserve">
+    <value>Text viewer</value>
+  </data>
+  <data name="buttonUp" xml:space="preserve">
+    <value>Back</value>
+  </data>
+  <data name="buttonVideo" xml:space="preserve">
+    <value>Video</value>
+  </data>
+  <data name="checkboxEnableEditMode" xml:space="preserve">
+    <value>Enable edit mode?</value>
+  </data>
+  <data name="checkboxEnableGestureMapping" xml:space="preserve">
+    <value>Enable gesture mapping?</value>
+  </data>
+  <data name="checkboxFreeSpace" xml:space="preserve">
+    <value>Free space</value>
+  </data>
+  <data name="checkboxInvertDisplay" xml:space="preserve">
+    <value>Invert display?</value>
+  </data>
+  <data name="checkboxLoopPlay2DRecord" xml:space="preserve">
+    <value>Loop play</value>
+  </data>
+  <data name="checkboxLoopPlay3DRecord" xml:space="preserve">
+    <value>Loop play</value>
+  </data>
+  <data name="checkboxObjectMapping" xml:space="preserve">
+    <value>Object mapping</value>
+  </data>
+  <data name="checkboxProjectVisualFeedback" xml:space="preserve">
+    <value>Project visual feedback</value>
+  </data>
+  <data name="checkboxRecognizeObjects" xml:space="preserve">
+    <value>Recognize objects</value>
+  </data>
+  <data name="checkboxShowCriticals" xml:space="preserve">
+    <value>Show criticals</value>
+  </data>
+  <data name="checkboxShowDemoAnimation" xml:space="preserve">
+    <value>Show demo animation?</value>
+  </data>
+  <data name="checkboxShowErrors" xml:space="preserve">
+    <value>Show errors</value>
+  </data>
+  <data name="checkboxShowFPSOnScreen" xml:space="preserve">
+    <value>Show FPS on screen?</value>
+  </data>
+  <data name="checkboxShowInformations" xml:space="preserve">
+    <value>Show informations</value>
+  </data>
+  <data name="checkboxShowWarnings" xml:space="preserve">
+    <value>Show warnings</value>
+  </data>
+  <data name="checkboxStartProjection" xml:space="preserve">
+    <value>Start projection</value>
+  </data>
+  <data name="checkboxTrackObject" xml:space="preserve">
+    <value>Track object</value>
+  </data>
+  <data name="checkboxDisplayVisualFeedback" xml:space="preserve">
+    <value>Display visual feedback</value>
+  </data>
+  <data name="labelActions" xml:space="preserve">
+    <value>Actions</value>
+  </data>
+  <data name="labelColorframeOffsetX" xml:space="preserve">
+    <value>Colorframe offset X:</value>
+  </data>
+  <data name="labelColorframeOffsetY" xml:space="preserve">
+    <value>Colorframe offset Y:</value>
+  </data>
+  <data name="labelCountOfRectangle" xml:space="preserve">
+    <value>Count of Rectangle</value>
+  </data>
+  <data name="labelCurrentStep" xml:space="preserve">
+    <value>Current step</value>
+  </data>
+  <data name="labelDepthRange" xml:space="preserve">
+    <value>DepthRange</value>
+  </data>
+  <data name="labelDescription" xml:space="preserve">
+    <value>Description</value>
+  </data>
+  <data name="labelDetectionMode" xml:space="preserve">
+    <value>Detection mode</value>
+  </data>
+  <data name="labelGestures" xml:space="preserve">
+    <value>Gestures</value>
+  </data>
+  <data name="labelHeight" xml:space="preserve">
+    <value>Height</value>
+  </data>
+  <data name="labelInvert" xml:space="preserve">
+    <value>Invert</value>
+  </data>
+  <data name="labelLoadedWorkflow" xml:space="preserve">
+    <value>Loaded workflow</value>
+  </data>
+  <data name="labelMatchingTolerance" xml:space="preserve">
+    <value>Matching tolerance:</value>
+  </data>
+  <data name="labelMaxDepth" xml:space="preserve">
+    <value>Maximal depth</value>
+  </data>
+  <data name="labelMinAreaonAdding" xml:space="preserve">
+    <value>MinArea (onAdding):</value>
+  </data>
+  <data name="labelMinAreaSubtraction" xml:space="preserve">
+    <value>MinArea (Subtraction):</value>
+  </data>
+  <data name="labelMinDepth" xml:space="preserve">
+    <value>Minimal depth</value>
+  </data>
+  <data name="labelMinValueChangeAdd" xml:space="preserve">
+    <value>MinValueChange (add):</value>
+  </data>
+  <data name="labelMovingThreshold" xml:space="preserve">
+    <value>Moving Threshold</value>
+  </data>
+  <data name="labelName" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="labelNameOfWorkStep" xml:space="preserve">
+    <value>Name of work step</value>
+  </data>
+  <data name="labelNext" xml:space="preserve">
+    <value>Next</value>
+  </data>
+  <data name="labelNoRecognition" xml:space="preserve">
+    <value>No recognition</value>
+  </data>
+  <data name="labelNotPlaying2DRecord" xml:space="preserve">
+    <value>Not playing</value>
+  </data>
+  <data name="labelNotPlaying3DRecord" xml:space="preserve">
+    <value>Not Playing</value>
+  </data>
+  <data name="labelNotRecording2D" xml:space="preserve">
+    <value>Not recording 2D</value>
+  </data>
+  <data name="labelNotRecording3D" xml:space="preserve">
+    <value>Not recording 3D</value>
+  </data>
+  <data name="labelNotRecordingProfile" xml:space="preserve">
+    <value>Not recording profile</value>
+  </data>
+  <data name="labelNoWorkflowLoaded" xml:space="preserve">
+    <value>No workflow loaded</value>
+  </data>
+  <data name="labelOffset" xml:space="preserve">
+    <value>Offset</value>
+  </data>
+  <data name="labelPercentOfPixelMatch" xml:space="preserve">
+    <value>% of pixels to match:</value>
+  </data>
+  <data name="labelPrevious" xml:space="preserve">
+    <value>Previous</value>
+  </data>
+  <data name="labelSettingsHeight" xml:space="preserve">
+    <value>Height</value>
+  </data>
+  <data name="labelSmoothing" xml:space="preserve">
+    <value>Smoothing</value>
+  </data>
+  <data name="labelSmoothingSteps" xml:space="preserve">
+    <value>Smoothing Steps</value>
+  </data>
+  <data name="labelStatus" xml:space="preserve">
+    <value>Status:</value>
+  </data>
+  <data name="labelStoppingThreshold" xml:space="preserve">
+    <value>Stopping Threshold</value>
+  </data>
+  <data name="labelWidth" xml:space="preserve">
+    <value>Width</value>
+  </data>
+  <data name="labelWorkSteps" xml:space="preserve">
+    <value>Work steps:</value>
+  </data>
+  <data name="listViewGroup" xml:space="preserve">
+    <value>Group</value>
+  </data>
+  <data name="listViewID" xml:space="preserve">
+    <value>ID</value>
+  </data>
+  <data name="listViewImage" xml:space="preserve">
+    <value>Image</value>
+  </data>
+  <data name="listViewMessage" xml:space="preserve">
+    <value>Message</value>
+  </data>
+  <data name="listViewPath" xml:space="preserve">
+    <value>Path</value>
+  </data>
+  <data name="menuItemCalibrateTable" xml:space="preserve">
+    <value>Calibrate Table...</value>
+  </data>
+  <data name="menuItemClose" xml:space="preserve">
+    <value>Close</value>
+  </data>
+  <data name="menuItemEditWorkflow" xml:space="preserve">
+    <value>_Edit Workflow</value>
+  </data>
+  <data name="menuItemEnglish" xml:space="preserve">
+    <value>English</value>
+  </data>
+  <data name="menuItemExit" xml:space="preserve">
+    <value>E_xit</value>
+  </data>
+  <data name="menuItemFile" xml:space="preserve">
+    <value>_File</value>
+  </data>
+  <data name="menuItemGerman" xml:space="preserve">
+    <value>German</value>
+  </data>
+  <data name="menuItemLanguage" xml:space="preserve">
+    <value>Language</value>
+  </data>
+  <data name="menuItemLoadScene" xml:space="preserve">
+    <value>Load scene</value>
+  </data>
+  <data name="menuItemLoadWorkflow" xml:space="preserve">
+    <value>_Load Workflow</value>
+  </data>
+  <data name="menuItemNewScene" xml:space="preserve">
+    <value>New Scene</value>
+  </data>
+  <data name="menuItemNewWorkflow" xml:space="preserve">
+    <value>_New Workflow</value>
+  </data>
+  <data name="menuItemOptions" xml:space="preserve">
+    <value>Options</value>
+  </data>
+  <data name="menuItemSave" xml:space="preserve">
+    <value>Save</value>
+  </data>
+  <data name="menuItemSaveScene" xml:space="preserve">
+    <value>Save Scene</value>
+  </data>
+  <data name="menuItemScenes" xml:space="preserve">
+    <value>Scenes</value>
+  </data>
+  <data name="menuItemSettings" xml:space="preserve">
+    <value>Settings...</value>
+  </data>
+  <data name="labelMinValueChangeSub" xml:space="preserve">
+    <value>MinValueChange (sub):</value>
+  </data>
+  <data name="radioButtonAssemblyArea" xml:space="preserve">
+    <value>Assembly area</value>
+  </data>
+  <data name="radioButtonBlob" xml:space="preserve">
+    <value>Blob</value>
+  </data>
+  <data name="radioButtonContour" xml:space="preserve">
+    <value>Contour</value>
+  </data>
+  <data name="radioButtonDrawingArea" xml:space="preserve">
+    <value>Drawing area</value>
+  </data>
+  <data name="radioButtonOn" xml:space="preserve">
+    <value>On</value>
+  </data>
+  <data name="radioButtonScanTable" xml:space="preserve">
+    <value>Scan  table</value>
+  </data>
+  <data name="radioButtonStatic" xml:space="preserve">
+    <value>Static</value>
+  </data>
+  <data name="tabItem2DTouch" xml:space="preserve">
+    <value>2DTouch</value>
+  </data>
+  <data name="tabItemAssemblyZone" xml:space="preserve">
+    <value>Assembly zone</value>
+  </data>
+  <data name="tabItemBoxes" xml:space="preserve">
+    <value>Boxes</value>
+  </data>
+  <data name="tabItemDebug" xml:space="preserve">
+    <value>Debug</value>
+  </data>
+  <data name="tabItemEditor" xml:space="preserve">
+    <value>Editor</value>
+  </data>
+  <data name="tabItemGestures" xml:space="preserve">
+    <value>Gestures</value>
+  </data>
+  <data name="tabItemGesturesDebug" xml:space="preserve">
+    <value>Gestures Debug</value>
+  </data>
+  <data name="tabItemObjects" xml:space="preserve">
+    <value>Objects</value>
+  </data>
+  <data name="tabItemPBD" xml:space="preserve">
+    <value>PBD</value>
+  </data>
+  <data name="tabItemScenes" xml:space="preserve">
+    <value>Scenes</value>
+  </data>
+  <data name="tabItemSettings" xml:space="preserve">
+    <value>Settings</value>
+  </data>
+  <data name="tabItemVideo" xml:space="preserve">
+    <value>Video</value>
+  </data>
+  <data name="tabItemVisualization" xml:space="preserve">
+    <value>Visualization</value>
+  </data>
+  <data name="tabItemWorkflow" xml:space="preserve">
+    <value>Workflow</value>
+  </data>
+  <data name="titleCalibrationDialog" xml:space="preserve">
+    <value>Calibration</value>
+  </data>
+  <data name="labelPathToSaveImageTo" xml:space="preserve">
+    <value>Path to save image to:</value>
+  </data>
+  <data name="titleCreateWorkflowDialog" xml:space="preserve">
+    <value>Create Workflow</value>
+  </data>
+  <data name="titleSettingsWindow" xml:space="preserve">
+    <value>Settings</value>
+  </data>
+  <data name="menuItemDelete" xml:space="preserve">
+    <value>Delete</value>
+  </data>
+  <data name="menuItemEdit" xml:space="preserve">
+    <value>Edit</value>
+  </data>
+  <data name="buttonCancel" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
+  <data name="buttonContinueRecording" xml:space="preserve">
+    <value>Pause / Continue</value>
+  </data>
+  <data name="buttonLoadObjectZone" xml:space="preserve">
+    <value>Load object zone</value>
+  </data>
+  <data name="buttonDeselectAll" xml:space="preserve">
+    <value>Deselect all</value>
+  </data>
+  <data name="buttonSelectAll" xml:space="preserve">
+    <value>Select all</value>
+  </data>
+  <data name="menuItemEditCustomScene" xml:space="preserve">
+    <value>Edit Custom Scene</value>
+  </data>
+  <data name="labelTimeEnd" xml:space="preserve">
+    <value>End Time:</value>
+  </data>
+  <data name="labelTimeSpan" xml:space="preserve">
+    <value>Time Span:</value>
+  </data>
+  <data name="labelTimeStart" xml:space="preserve">
+    <value>Start Time:</value>
+  </data>
+  <data name="menuItemCalibrateKinect" xml:space="preserve">
+    <value>Calibrate Kinect...</value>
+  </data>
+  <data name="labelPercentWithinBoundTrigger" xml:space="preserve">
+    <value>% to Trigger</value>
+  </data>
+  <data name="menuItemEditScene" xml:space="preserve">
+    <value>Edit Scene</value>
+  </data>
+  <data name="labelNetworkAuthToken" xml:space="preserve">
+    <value>Auth Token</value>
+  </data>
+  <data name="labelNetworkSettings" xml:space="preserve">
+    <value>Network Settings</value>
+  </data>
+  <data name="labelNetworkTableName" xml:space="preserve">
+    <value>Table name</value>
+  </data>
+  <data name="labelServerBaseAddress" xml:space="preserve">
+    <value>Server base address</value>
+  </data>
+  <data name="buttonPolygon" xml:space="preserve">
+    <value>Polygon</value>
+  </data>
+  <data name="tabItemSurvey" xml:space="preserve">
+    <value>Survey</value>
+  </data>
+  <data name="checkboxEnableFaultDetection" xml:space="preserve">
+    <value>Enable box fault detection</value>
+  </data>
+  <data name="labelBoxFeedbackTimeout" xml:space="preserve">
+    <value>Box feedback timeout</value>
+  </data>
+  <data name="labelPartsProduced" xml:space="preserve">
+    <value>parts produced</value>
+  </data>
+  <data name="menuItemAbout" xml:space="preserve">
+    <value>About</value>
+  </data>
+  <data name="menuItemHelp" xml:space="preserve">
+    <value>Help</value>
+  </data>
+  <data name="checkboxAdaptivityEnabled" xml:space="preserve">
+    <value>Enable automatic Adaptivity</value>
+  </data>
+  <data name="labelAdaptivityThresholdHard" xml:space="preserve">
+    <value>Adaptivity Threshold to Hard</value>
+  </data>
+  <data name="labelAdaptivityThresholdMedium" xml:space="preserve">
+    <value>Adaptivity Threshold to Medium</value>
+  </data>
+  <data name="checkboxStreamUDP" xml:space="preserve">
+    <value>Stream scenedata via UDP to IP</value>
+  </data>
+  <data name="checkboxEnableEnsensoSmoothing" xml:space="preserve">
+    <value>Enable Ensenso Smoothing</value>
+  </data>
+  <data name="buttonAudio" xml:space="preserve">
+    <value>Audio</value>
+  </data>
+</root>

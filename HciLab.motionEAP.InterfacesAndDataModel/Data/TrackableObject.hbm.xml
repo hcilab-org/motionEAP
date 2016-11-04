@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2"
+                  assembly="HciLab.motionEAP.InterfacesAndDataModel"
+                  namespace="HciLab.motionEAP.InterfacesAndDataModel.Data">
+
+  <class name="TrackableObject" table="trackableobjects">
+    <id name="Id">
+      <generator class="guid" />
+    </id>
+
+    <property name="Image" />
+    <property name="Name" />
+    <property name="Category" />
+    
+  </class>
+
+</hibernate-mapping>

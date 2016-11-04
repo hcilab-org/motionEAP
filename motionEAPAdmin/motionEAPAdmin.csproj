@@ -1,0 +1,578 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{6FEA995D-4A0D-44CF-9F5B-A79CC9010A04}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>motionEAPAdmin</RootNamespace>
+    <AssemblyName>motionEAPAdmin</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <TargetFrameworkProfile>
+    </TargetFrameworkProfile>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <WarningLevel>4</WarningLevel>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+    <NuGetPackageImportStamp>0489cfe0</NuGetPackageImportStamp>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <AllowUnsafeBlocks>false</AllowUnsafeBlocks>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject>motionEAPAdmin.Backend.ApplicationCore</StartupObject>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Emgu.CV">
+      <HintPath>..\libs\Emgu.CV.dll</HintPath>
+    </Reference>
+    <Reference Include="Emgu.CV.GPU">
+      <HintPath>..\libs\Emgu.CV.GPU.dll</HintPath>
+    </Reference>
+    <Reference Include="Emgu.CV.UI">
+      <HintPath>..\libs\Emgu.CV.UI.dll</HintPath>
+    </Reference>
+    <Reference Include="Emgu.Util">
+      <HintPath>..\libs\Emgu.Util.dll</HintPath>
+    </Reference>
+    <Reference Include="HelixToolkit.Wpf, Version=2014.2.429.0, Culture=neutral, PublicKeyToken=52aa3500039caf0d, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\HelixToolkit.Wpf.2014.2.429\lib\net45\HelixToolkit.Wpf.dll</HintPath>
+    </Reference>
+    <Reference Include="Iesi.Collections">
+      <HintPath>..\libs\Iesi.Collections.dll</HintPath>
+    </Reference>
+    <Reference Include="LeapCSharp.NET4.0">
+      <HintPath>..\libs\LeapCSharp.NET4.0.dll</HintPath>
+    </Reference>
+    <Reference Include="MouseKeyboardActivityMonitor, Version=3.0.1.9571, Culture=neutral, processorArchitecture=AMD64">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Visual Studio 2013\Projects\PresenterListenerFORMS\MouseKeyboardActivityMonitor.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Newtonsoft.Json.6.0.8\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="NHibernate">
+      <HintPath>..\libs\NHibernate.dll</HintPath>
+    </Reference>
+    <Reference Include="NiWrapper.Net, Version=2.2.0.33, Culture=neutral, processorArchitecture=AMD64">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\NiWrapper.Net.x64.2.2.0.34\lib\NiWrapper.Net.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.configuration" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Data.SQLite">
+      <HintPath>..\libs\System.Data.SQLite.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Management" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Xaml">
+      <RequiredTargetFramework>4.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="WindowsBase" />
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+    <Reference Include="Xceed.Wpf.AvalonDock">
+      <HintPath>..\packages\Extended.Wpf.Toolkit.2.3\lib\net40\Xceed.Wpf.AvalonDock.dll</HintPath>
+    </Reference>
+    <Reference Include="Xceed.Wpf.AvalonDock.Themes.Aero">
+      <HintPath>..\packages\Extended.Wpf.Toolkit.2.3\lib\net40\Xceed.Wpf.AvalonDock.Themes.Aero.dll</HintPath>
+    </Reference>
+    <Reference Include="Xceed.Wpf.AvalonDock.Themes.Metro">
+      <HintPath>..\packages\Extended.Wpf.Toolkit.2.3\lib\net40\Xceed.Wpf.AvalonDock.Themes.Metro.dll</HintPath>
+    </Reference>
+    <Reference Include="Xceed.Wpf.AvalonDock.Themes.VS2010">
+      <HintPath>..\packages\Extended.Wpf.Toolkit.2.3\lib\net40\Xceed.Wpf.AvalonDock.Themes.VS2010.dll</HintPath>
+    </Reference>
+    <Reference Include="Xceed.Wpf.DataGrid">
+      <HintPath>..\packages\Extended.Wpf.Toolkit.2.3\lib\net40\Xceed.Wpf.DataGrid.dll</HintPath>
+    </Reference>
+    <Reference Include="Xceed.Wpf.Toolkit, Version=2.3.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Extended.Wpf.Toolkit.2.3\lib\net40\Xceed.Wpf.Toolkit.dll</HintPath>
+    </Reference>
+    <Reference Include="ZedGraph">
+      <HintPath>..\libs\ZedGraph.dll</HintPath>
+    </Reference>
+    <Reference Include="zxing, Version=0.14.0.0, Culture=neutral, PublicKeyToken=4e88037ac681fe60, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\ZXing.Net.0.14.0.1\lib\net40\zxing.dll</HintPath>
+    </Reference>
+    <Reference Include="zxing.presentation">
+      <HintPath>..\packages\ZXing.Net.0.14.0.1\lib\net40\zxing.presentation.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <ApplicationDefinition Include="App.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </ApplicationDefinition>
+    <Compile Include="Backend\USBCameraDetector.cs" />
+    <Compile Include="Backend\QRDetectManager.cs" />
+    <Compile Include="Backend\StateManager.cs" />
+    <Compile Include="Backend\StudyLogger.cs" />
+    <Compile Include="ContentProviders\SettingsManager.cs" />
+    <Compile Include="GUI\AssemblyZonesPanel.xaml.cs">
+      <DependentUpon>AssemblyZonesPanel.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="GUI\BoxesPanel.xaml.cs">
+      <DependentUpon>BoxesPanel.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="GUI\Dialog\AboutDialog.xaml.cs">
+      <DependentUpon>AboutDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="GUI\Dialog\EditFailState.xaml.cs">
+      <DependentUpon>EditFailState.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="GUI\Dialog\EditObjectDetectionZoneDialog.xaml.cs">
+      <DependentUpon>EditObjectDetectionZoneDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="GUI\Dialog\EditPolygon.xaml.cs">
+      <DependentUpon>EditPolygon.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="GUI\Dialog\SceneEditorDialog.xaml.cs">
+      <DependentUpon>SceneEditorDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="GUI\Dialog\EditWorkingStepDialog.xaml.cs">
+      <DependentUpon>EditWorkingStepDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="GUI\Dialog\WorkflowEditor.xaml.cs">
+      <DependentUpon>WorkflowEditor.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="GUI\EditorPanel.xaml.cs">
+      <DependentUpon>EditorPanel.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="GUI\ObjectsPanel.xaml.cs">
+      <DependentUpon>ObjectsPanel.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="GUI\PBDPanel.xaml.cs">
+      <DependentUpon>PBDPanel.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="GUI\TypeEditor\PolygonTypeEditor.cs" />
+    <Compile Include="GUI\TypeEditor\VideoBrowseTypeEditor.cs" />
+    <Compile Include="GUI\TypeEditor\ImageBrowseTypeEditor.cs" />
+    <Compile Include="GUI\ValidationRules\DoubleValidationRule.cs" />
+    <Compile Include="GUI\ValidationRules\NumberInRangeValidationRule.cs" />
+    <Compile Include="GUI\ValueConverter\RadioBoolToIntConverter.cs" />
+    <Compile Include="Localization\DesignHelpers.cs" />
+    <Compile Include="Localization\Locale.cs" />
+    <Compile Include="Localization\LocaleChangedEvent.cs" />
+    <Compile Include="Localization\LocalizationHelper.cs" />
+    <Compile Include="Localization\MainScreenViewModel.cs" />
+    <Compile Include="Localization\ResourceManagerService.cs" />
+    <Compile Include="Localization\Strings.de-DE.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Strings.de-DE.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Localization\Strings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Strings.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Model\Process\WorkflowCondition.cs" />
+    <Compile Include="Model\Process\WorkflowFailState.cs" />
+    <Compile Include="Network\CommunicationManager.cs" />
+    <Compile Include="Network\NetworkManager.cs" />
+    <Compile Include="Network\NetworkTableMonitor.cs" />
+    <Compile Include="Network\NetworkTableStatus.cs" />
+    <Compile Include="Network\ServerInfo.cs" />
+    <Compile Include="Network\TableInfo.cs" />
+    <Compile Include="Scene\SceneAudio.cs" />
+    <Compile Include="Scene\SceneCollectionExtension.cs" />
+    <Compile Include="Statistics\StatsManager.cs" />
+    <Compile Include="Statistics\WorkflowStats.cs" />
+    <Compile Include="Statistics\WorkingStepStats.cs" />
+    <Page Include="GUI\AssemblyZonesPanel.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="GUI\BoxesPanel.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="GUI\Dialog\AboutDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="GUI\Dialog\EditFailState.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="GUI\Dialog\EditObjectDetectionZoneDialog.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="GUI\Dialog\EditPolygon.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="GUI\Dialog\SceneEditorDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="GUI\Dialog\EditWorkingStepDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="GUI\Dialog\WorkflowEditor.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="GUI\AdminView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="GUI\Dialog\CalibrationDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="GUI\Dialog\EditAssemblyZoneDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="GUI\Dialog\EditBoxDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Frontend\TableWindow3D.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Compile Include="Backend\AssemblyZones\AssemblyZone.cs" />
+    <Compile Include="Backend\AssemblyZones\AssemblyZoneLayout.cs" />
+    <Compile Include="Backend\AssemblyZones\AssemblyZoneManager.cs" />
+    <Compile Include="Backend\Boxes\Box.cs" />
+    <Compile Include="Backend\Boxes\BoxLayout.cs" />
+    <Compile Include="Backend\Boxes\BoxManager.cs" />
+    <Compile Include="Backend\CalibrationManager.cs" />
+    <Compile Include="Backend\FreeSpaceManager.cs" />
+    <Compile Include="Backend\LogMessage.cs" />
+    <Compile Include="Backend\NotificationManager.cs" />
+    <Compile Include="Backend\ObjectDetection\ObjectDetectionZone.cs" />
+    <Compile Include="Backend\ObjectDetection\ObjectDetectionZonesLayout.cs" />
+    <Compile Include="Backend\ObjectDetection\ObjectDetectionManager.cs" />
+    <Compile Include="Backend\PBDManager.cs" />
+    <Compile Include="Backend\BlobManager.cs" />
+    <Compile Include="Backend\WorkflowBase.cs" />
+    <Compile Include="Backend\WorkflowManager.cs" />
+    <Compile Include="Database\DatabaseManager.cs" />
+    <Compile Include="GUI\AdminView.xaml.cs">
+      <DependentUpon>AdminView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="App.xaml.cs">
+      <DependentUpon>App.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Backend\ApplicationCore.cs" />
+    <Compile Include="Backend\BackendControl.cs" />
+    <Compile Include="Backend\Logger.cs" />
+    <Compile Include="Backend\ScreenManager.cs" />
+    <Compile Include="Backend\EditWorkflowManager.cs" />
+    <Compile Include="ContentProviders\DebugInformationManager.cs" />
+    <Compile Include="GUI\Dialog\CalibrationDialog.xaml.cs">
+      <DependentUpon>CalibrationDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="GUI\Dialog\EditAssemblyZoneDialog.xaml.cs">
+      <DependentUpon>EditAssemblyZoneDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="GUI\Dialog\EditBoxDialog.xaml.cs">
+      <DependentUpon>EditBoxDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="GUI\Dialog\ObjectEditDialog.xaml.cs">
+      <DependentUpon>ObjectEditDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="GUI\Dialog\SettingsDialog.xaml.cs">
+      <DependentUpon>SettingsDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="GUI\VideoPanel.xaml.cs">
+      <DependentUpon>VideoPanel.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="GUI\VisualizationPanel.xaml.cs">
+      <DependentUpon>VisualizationPanel.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="GUI\WorkflowPanel.xaml.cs">
+      <DependentUpon>WorkflowPanel.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Scene\SceneCircle.cs" />
+    <Compile Include="Scene\SceneColor.cs" />
+    <Compile Include="Scene\SceneCountDown.cs" />
+    <Compile Include="Scene\ScenePolygon.cs" />
+    <Compile Include="Scene\SceneTextViewer.cs" />
+    <Compile Include="Scene\SceneVideo.cs" />
+    <Compile Include="Model\Process\AdaptiveScene.cs" />
+    <Compile Include="Model\Process\AdaptivityLevel.cs" />
+    <Compile Include="Model\Process\HardwareSetup.cs" />
+    <Compile Include="Model\Process\Workflow.cs" />
+    <Compile Include="Model\Process\WorkingStep.cs" />
+    <Compile Include="Backend\SceneManager.cs" />
+    <Compile Include="Scene\Scene.cs" />
+    <Compile Include="Scene\SceneImage.cs" />
+    <Compile Include="Scene\SceneItem.cs" />
+    <Compile Include="Scene\SceneRect.cs" />
+    <Compile Include="Scene\SceneText.cs" />
+    <Compile Include="Frontend\TableWindow3D.xaml.cs">
+      <DependentUpon>TableWindow3D.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Page Include="GUI\EditorPanel.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="GUI\Dialog\ObjectEditDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="GUI\Dialog\SettingsDialog.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="GUI\ObjectsPanel.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="GUI\PBDPanel.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="GUI\VideoPanel.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="GUI\VisualizationPanel.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="GUI\WorkflowPanel.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <EmbeddedResource Include="Localization\Strings.de-DE.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Strings.de-DE.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Localization\Strings.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Strings.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <None Include="app.config">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="packages.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <AppDesigner Include="Properties\" />
+    <None Include="Resources\GestureProfiles\hand0_profile-lib.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\GestureProfiles\hand0_stroke_fotoHand0.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\GestureProfiles\hand1_profile-lib.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\GestureProfiles\hand1_stroke_fotoHand1.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\GestureTemplates\2D\gesture2D-lib-all.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\GestureTemplates\2D\gesture2D-lib-arrowleft.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\GestureTemplates\2D\gesture2D-lib-check.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\GestureTemplates\2D\gesture2D-lib-circle.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\GestureTemplates\2D\gesture2D-lib-cross.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\GestureTemplates\2D\gesture2D-lib-swipe.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\GestureTemplates\2D\gesture2D-lib-swipedown.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\GestureTemplates\2D\gesture2D-lib.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\GestureTemplates\3D\gesture-lib -check.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\GestureTemplates\3D\gesture-lib -dreiCircle.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\GestureTemplates\3D\gesture3D-lib - Check Cross Circle.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\GestureTemplates\3D\gesture3D-lib - Check Cross Jumpleft.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\GestureTemplates\3D\gesture3D-lib.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\GestureTemplates\3D\stroke3D-38.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include=".NETFramework,Version=v4.0,Profile=Client">
+      <Visible>False</Visible>
+      <ProductName>Microsoft .NET Framework 4 Client Profile %28x86 und x64%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1 Client Profile</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Windows.Installer.3.1">
+      <Visible>False</Visible>
+      <ProductName>Windows Installer 3.1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\HciLab.motionEAP.InterfacesAndDataModel\HciLab.motionEAP.InterfacesAndDataModel.csproj">
+      <Project>{475219d7-19f9-43d4-b3ab-dd981f0b4ae4}</Project>
+      <Name>HciLab.motionEAP.InterfacesAndDataModel</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\HciLab.Utilities\HciLab.Utilities.csproj">
+      <Project>{1949bea9-b654-4bec-96fc-604b46dd3c21}</Project>
+      <Name>HciLab.Utilities</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\HciLab.Kinect\HciLab.Kinect.csproj">
+      <Project>{366759F2-99B0-4370-9E43-319D9DB16710}</Project>
+      <Name>HciLab.Kinect</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\checkerboard.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Database\hibernate.config.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\de_DE.png" />
+    <Resource Include="Resources\en_US.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\target1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Database\Objects\Mappings\" />
+    <Folder Include="Scene\ContentProviders\" />
+    <Folder Include="Scene\Gamification\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="settings.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\placeholder.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="lib\NxLib64CLIv4.0.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="MouseKeyboardActivityMonitor.dll" />
+    <Resource Include="Resources\logo.png" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Import Project="..\packages\Microsoft.Bcl.Build.1.0.14\tools\Microsoft.Bcl.Build.targets" Condition="Exists('..\packages\Microsoft.Bcl.Build.1.0.14\tools\Microsoft.Bcl.Build.targets')" />
+  <Target Name="EnsureBclBuildImported" BeforeTargets="BeforeBuild" Condition="'$(BclBuildImported)' == ''">
+    <Error Condition="!Exists('..\packages\Microsoft.Bcl.Build.1.0.14\tools\Microsoft.Bcl.Build.targets')" Text="This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=317567." HelpKeyword="BCLBUILD2001" />
+    <Error Condition="Exists('..\packages\Microsoft.Bcl.Build.1.0.14\tools\Microsoft.Bcl.Build.targets')" Text="The build restored NuGet packages. Build the project again to include these packages in the build. For more information, see http://go.microsoft.com/fwlink/?LinkID=317568." HelpKeyword="BCLBUILD2002" />
+  </Target>
+  <Import Project="..\packages\Baseclass.Contrib.Nuget.Output.1.0.7\build\net40\Baseclass.Contrib.Nuget.Output.targets" Condition="Exists('..\packages\Baseclass.Contrib.Nuget.Output.1.0.7\build\net40\Baseclass.Contrib.Nuget.Output.targets')" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\Baseclass.Contrib.Nuget.Output.1.0.7\build\net40\Baseclass.Contrib.Nuget.Output.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Baseclass.Contrib.Nuget.Output.1.0.7\build\net40\Baseclass.Contrib.Nuget.Output.targets'))" />
+  </Target>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

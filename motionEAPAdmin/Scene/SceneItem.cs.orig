@@ -1,0 +1,951 @@
+﻿using HciLab.Utilities.Mathematics.Core;
+using motionEAPAdmin.Visual3D;
+using System;
+using System.Collections.ObjectModel;
+using System.ComponentModel;
+using System.Runtime.InteropServices;
+using System.Runtime.Serialization;
+using System.Windows.Controls;
+using System.Windows.Media;
+using System.Windows.Media.Media3D;
+
+namespace motionEAPAdmin.Scene
+{
+    [ClassInterface(ClassInterfaceType.AutoDual)]
+    [ComVisible(true)]
+    [Serializable()]
+    public abstract class SceneItem : ISerializable, INotifyPropertyChanged
+    {
+        private int m_SerVersionSceneItem = 1;
+
+        private SceneItem m_Parent;
+
+        public ObservableCollection<SceneItem> m_Items = new ObservableCollection<SceneItem>();
+
+        protected int m_TouchFingerCount = 0; // how many fingers are in the rectangle
+        public motionEAPAdmin.Model.State m_CurrentState; // the current state that was given to the Scene
+
+        private double m_Dx, m_Dy;
+        private double m_Dx1, m_Dy1, m_Dx2, m_Dy2, m_Dr, m_Ds;
+        private int m_EditTouchId1 = -2;
+        private int m_EditTouchId2 = -2;
+
+        private double m_X;
+
+        private double m_Y;
+
+        private double m_Width;
+
+        private double m_Height;
+
+        private double m_Rotation;
+
+        protected double m_Scale;
+
+        // rotation center
+        private double m_Rx;
+
+        private double m_Ry;
+
+        public bool m_VisibleValue = true;
+
+        // this is used for DB-related stuff
+        public long m_Id;
+
+        // this is used to identify the scene when temporarily displaying it
+        public String m_IdString;
+
+        protected Scene m_Scene;
+        public SceneItem m_MovingItem;
+
+        protected ObservableCollection<Vector2> m_CurrentTouches = new ObservableCollection<Vector2>();
+        protected ObservableCollection<Vector2> m_LastTouches = new ObservableCollection<Vector2>();
+
+        public bool m_Touchy = false;
+
+        private ObservableCollection<Vector2> m_Moves = new ObservableCollection<Vector2>();
+
+        private System.Windows.Point m_ParentStart;
+        private System.Windows.Point m_StartXY;
+        
+        private TextBox m_XBox;
+        private TextBox m_YBox;
+        private TextBox m_ScaleBox;
+
+        private double m_LastT1x, m_LastT1y;
+        private double m_LastT2x, m_LastT2y;
+
+        private Matrix m_Transform;
+
+        public SceneItem()
+        {
+        }
+
+        public SceneItem(SceneItem pParent, double pX, double pY, double pWidth, double pHeight, double pRotation = 0, double pRotationCenterX = 0, double pRotationCenterY = 0, double pScale = 1.0)
+        {
+            this.m_Parent = pParent;
+            this.m_X = pX;
+            this.m_Y = pY;
+            this.m_Width = pWidth;
+            this.m_Height = pHeight;
+            this.m_Rotation = pRotation;
+            this.m_Rx = pRotationCenterX;
+            this.m_Ry = pRotationCenterY;
+            this.m_Scale = pScale;
+
+            if (pRotationCenterX == 0 && pRotationCenterY == 0)
+            {
+                m_Rx = pWidth / 2;
+                m_Ry = pHeight / 2;
+            }
+            UpdateTransform();
+
+            if (pParent != null)
+                m_Scene = pParent.m_Scene;
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        private void NotifyPropertyChanged(string info)
+        {
+            if (PropertyChanged != null)
+            {
+                PropertyChanged(this, new PropertyChangedEventArgs(info));
+            }
+        }
+
+        public double X
+        {
+            get { return m_X; }
+            set { 
+                m_X = value;
+                NotifyPropertyChanged("X");
+            }
+        }
+
+        public double Y
+        {
+            get { return m_Y; }
+            set { m_Y = value; 
+                NotifyPropertyChanged("Y");}
+        }
+
+        public double Width
+        {
+            get { return m_Width; }
+            set
+            {
+                m_Width = value;
+                NotifyPropertyChanged("WIDTH");
+            }
+        }
+
+        public double Height
+        {
+            get { return m_Height; }
+            set
+            {
+                m_Height = value;
+                NotifyPropertyChanged("HEIGHT");
+            }
+        }
+
+
+        protected SceneItem(SerializationInfo pInfo, StreamingContext context)
+        {
+            int pSerVersion = pInfo.GetInt32("m_SerVersionSceneItem");
+
+            if (pSerVersion < 1)
+                return;
+
+            m_Items = (ObservableCollection<SceneItem>)pInfo.GetValue("m_Items", typeof(ObservableCollection<SceneItem>));
+
+            m_Id = pInfo.GetInt32("m_Id");
+            X = pInfo.GetDouble("m_X");
+            m_Y = pInfo.GetDouble("m_Y");
+            m_Height = pInfo.GetDouble("m_Height");
+            m_Width = pInfo.GetDouble("m_Width");
+            m_Rotation = pInfo.GetDouble("m_Rotation");
+            m_Rx = pInfo.GetDouble("m_Rx");
+            m_Ry = pInfo.GetDouble("m_Ry");
+            m_Scale = pInfo.GetDouble("m_Scale");
+        }
+
+        public void GetObjectData(SerializationInfo info, StreamingContext context)
+        {
+            info.AddValue("m_SerVersionSceneItem", m_SerVersionSceneItem);
+
+            info.AddValue("m_Items", m_Items);
+            info.AddValue("m_Id", m_Id);
+            info.AddValue("m_X", X);
+            info.AddValue("m_Y", m_Y);
+            info.AddValue("m_Height", m_Height);
+            info.AddValue("m_Width", m_Width);
+            info.AddValue("m_Rotation", m_Rotation);
+            info.AddValue("m_Rx", m_Rx);
+            info.AddValue("m_Ry", m_Ry);
+            info.AddValue("m_Scale", m_Scale);
+        }
+
+
+        public double Rotation // radians
+        {
+            get
+            {
+                return m_Rotation;
+            }
+            set
+            {
+                m_Rotation = value;
+                UpdateTransform();
+            }
+        }
+
+        public double Scale
+        {
+            get
+            {
+                return m_Scale;
+            }
+            set
+            {
+                m_Scale = value;
+                UpdateTransform();
+            }
+        }
+
+        public double Rx
+        {
+            get
+            {
+                return m_Rx;
+            }
+            set
+            {
+                m_Rx = value;
+                UpdateTransform();
+            }
+        }
+                
+        public double Ry
+        {
+            get
+            {
+                return m_Ry;
+            }
+            set
+            {
+                m_Ry = value;
+                UpdateTransform();
+            }
+        }
+
+        public virtual bool Visible
+        {
+            set
+            {
+                m_VisibleValue = value;
+            }
+
+            get
+            {
+                return m_VisibleValue;
+            }
+        }
+
+        
+
+        public long Id
+        {
+            set
+            {
+                m_Id = value;
+            }
+
+            get
+            {
+                return m_Id;
+            }
+        }
+
+        public String IdString
+        {
+            get
+            {
+                return m_IdString;
+            }
+            set
+            {
+                m_IdString = value;
+            }
+        }
+
+        public bool Hits(double x, double y)
+        {
+            double ax = 0;
+            double ay = 0;
+            double bx = m_Width;
+            double by = 0;
+            double cx = m_Width;
+            double cy = m_Height;
+            double dx = 0;
+            double dy = m_Height;
+
+            System.Windows.Point ap = m_Transform.Transform(new System.Windows.Point(ax, ay));
+            System.Windows.Point bp = m_Transform.Transform(new System.Windows.Point(bx, by));
+            System.Windows.Point cp = m_Transform.Transform(new System.Windows.Point(cx, cy));
+            System.Windows.Point dp = m_Transform.Transform(new System.Windows.Point(dx, dy));
+
+            ax = (double)ap.X;
+            ay = (double)ap.Y;
+            bx = (double)bp.X;
+            by = (double)bp.Y;
+            cx = (double)cp.X;
+            cy = (double)cp.Y;
+            dx = (double)dp.X;
+            dy = (double)dp.Y;
+
+            // collission for non axis aligned rectangle
+
+            double bax = bx - ax;
+            double bay = by - ay;
+            double dax = dx - ax;
+            double day = dy - ay;
+
+            if ((x - ax) * bax + (y - ay) * bay < 0.0) return false;
+            if ((x - bx) * bax + (y - by) * bay > 0.0) return false;
+            if ((x - ax) * dax + (y - ay) * day < 0.0) return false;
+            if ((x - dx) * dax + (y - dy) * day > 0.0) return false;
+
+            return true;
+        }
+
+        /*public void Touch(motionEAPAdmin.Model.State pCurrentState)
+        {
+            SceneManager.Instance.CurrentScene.currentState = pCurrentState;
+
+            // Collect new touches in ubiPoints (inefficient)
+            List<UbiDisplays.FingerPoint> ubiPoints = new List<UbiDisplays.FingerPoint>();
+            foreach (Model.Point currentPoint in pCurrentState.getTouchPoints())
+            {
+                if (currentPoint != null)
+                {
+                    ubiPoints.Add(new UbiDisplays.FingerPoint(currentPoint.X, currentPoint.Y, currentPoint.ID));
+                }
+            }
+
+            SwitchTouchPoints();
+            foreach (var point in ubiPoints)
+            {
+                Touch(point.X, point.Y, point.Id);
+            }
+            HandleTouchPoints();
+        }
+
+        public void TestTouch(UbiDisplays.FingerPoint[] ubiPoints)
+        {
+            SwitchTouchPoints();
+            foreach (var point in ubiPoints)
+            {
+                Touch(point.X, point.Y, point.Id);
+            }
+            HandleTouchPoints();
+        }*/
+
+        // Moves currentTouches to lastTouches, clears currentTouches.
+        // Reuses previous lists for efficiency.
+        private void SwitchTouchPoints()
+        {
+            ObservableCollection<Vector2> temp = m_CurrentTouches;
+            m_LastTouches.Clear();
+            m_CurrentTouches = m_LastTouches;
+            m_LastTouches = temp;
+            foreach (var item in m_Items) item.SwitchTouchPoints();
+        }
+
+        protected void HandleTouchPoints()
+        {
+            foreach (var touch in m_LastTouches)
+            {
+                if (!Contains(m_CurrentTouches, touch.Id))
+                {
+                    if (m_Scene.EditMode)
+                    {
+                        if (m_MovingItem != null) m_MovingItem.EditUntouched(touch);
+                        EditUntouched(touch);
+                    }
+                    else Untouched(touch);
+                }
+            }
+
+            m_Moves.Clear();
+            foreach (var touch in m_CurrentTouches)
+            {
+                if (Contains(m_LastTouches, touch.Id))
+                {
+                    m_Moves.Add(touch);
+                }
+                else
+                {
+                    if (m_Scene.EditMode) EditTouched(touch);
+                    else Touched(touch);
+                }
+            }
+
+            if (m_Moves.Count > 0)
+            {
+                if (m_Scene.EditMode)
+                {
+                    EditTouchMoved(m_Moves);
+                }
+                else
+                {
+                    TouchMoved(m_Moves);
+                }
+            }
+
+            foreach (var item in m_Items)
+            {
+                item.HandleTouchPoints();
+            }
+        }
+
+        private void Touch(double x, double y, int touchId)
+        {
+            if (m_MovingItem != null)
+            {
+                var inverse = m_MovingItem.m_Transform;
+                inverse.Invert();
+                System.Windows.Point p = inverse.Transform(new System.Windows.Point(x, y));
+                m_MovingItem.Touch((double)p.X, (double)p.Y, touchId);
+                return;
+            }
+            foreach (var item in m_Items)
+            {
+                if (item.Visible)
+                {
+                    if (item.Hits(x, y))
+                    {
+                        var inverse = item.m_Transform;
+                        inverse.Invert();
+                        System.Windows.Point p = inverse.Transform(new System.Windows.Point(x, y));
+                        item.Touch((double)p.X, (double)p.Y, touchId);
+                        return;
+                    }
+                }
+            }
+            AddTouch(new Vector2(x, y, touchId));
+        }
+
+        private static bool Contains(ObservableCollection<Vector2> touches, int id)
+        {
+            foreach (var touch in touches)
+            {
+                if (touch.Id == id) return true;
+            }
+            return false;
+        }
+
+        // Takes a touch in local coordinates
+        public void AddTouch(Vector2 touch)
+        {
+            if (m_Scene != null)
+            {
+                if (m_Touchy || (m_Scene.EditMode && touch.Id == -1))
+                {
+                    if (!Contains(m_CurrentTouches, touch.Id))
+                    {
+                        m_CurrentTouches.Add(touch);
+                    }
+                }
+                else if (m_Parent != null)
+                {
+                    var point = m_Transform.Transform(new System.Windows.Point(touch.X, touch.Y));
+                    m_Parent.AddTouch(new Vector2((double)point.X, (double)point.Y, touch.Id));
+                }
+            }
+        }
+
+        public virtual void Touched(Vector2 touch)
+        {
+            m_TouchFingerCount = m_TouchFingerCount + 1;
+        }
+
+        public virtual void TouchMoved(ObservableCollection<Vector2> moves)
+        {
+
+        }
+
+        public virtual void Untouched(Vector2 touch)
+        {
+            m_TouchFingerCount = m_TouchFingerCount - 1;
+        }
+
+        private void EditTouched(Vector2 touch)
+        {
+            if (GetType() == typeof(Scene)) return;
+            if (m_EditTouchId1 >= -1 && m_EditTouchId2 >= -1) return;
+            if (m_EditTouchId1 < -1 && m_EditTouchId2 < -1)
+            {
+                m_ParentStart = m_Transform.Transform(new System.Windows.Point(touch.X, touch.Y));
+                m_StartXY = new System.Windows.Point(X, Y);
+
+                m_LastT1x = m_Dx1 = m_Dx = touch.X;
+                m_LastT1y = m_Dy1 = m_Dy = touch.Y;
+                m_Dr = Rotation;
+                m_EditTouchId1 = touch.Id;
+                if (m_Parent != null) m_Parent.m_MovingItem = this;
+                if (m_Scene.EditItem != this)
+                {
+                    m_Scene.EditItem = this;
+                    m_Scene.FireEditItemChanged(this);
+                }
+            }
+            else
+            {
+                m_EditTouchId2 = touch.Id;
+                m_LastT2x = m_Dx2 = touch.X;
+                m_LastT2y = m_Dy2 = touch.Y;
+                m_Dr = Rotation;
+                m_Ds = Scale;
+            }
+        }
+
+        public void EditTouchMoved(ObservableCollection<Vector2> moves)
+        {
+            if (GetType() == typeof(Scene)) return;
+
+            if (moves.Count > 1)
+            {
+                foreach (Vector2 move in moves)
+                {
+                    if (m_EditTouchId1 == move.Id)
+                    {
+                        m_LastT1x = move.X;
+                        m_LastT1y = move.Y;
+                    }
+                    if (m_EditTouchId2 == move.Id)
+                    {
+                        m_LastT2x = move.X;
+                        m_LastT2y = move.Y;
+                    }
+                }
+
+                double baseRotation = Math.Atan2(m_Dy2 - m_Dy1, m_Dx2 - m_Dx1);
+                double currentRotation = Math.Atan2(m_LastT2y - m_LastT1y, m_LastT2x - m_LastT1x);
+                double baseDistance = Math.Sqrt((m_Dx2 - m_Dx1) * (m_Dx2 - m_Dx1) + (m_Dy2 - m_Dy1) * (m_Dy2 - m_Dy1));
+                double currentDistance = Math.Sqrt((m_LastT2x - m_LastT1x) * (m_LastT2x - m_LastT1x) + (m_LastT2y - m_LastT1y) * (m_LastT2y - m_LastT1y));
+                Rotation = m_Dr + (double)(currentRotation - baseRotation);
+                Scale = (double)(m_Ds * currentDistance / baseDistance);
+            }
+            else
+            {
+                var touch = moves[0];
+                if (m_EditTouchId1 == touch.Id && m_EditTouchId2 < -1)
+                {
+                    System.Windows.Point parentNow = m_Transform.Transform(new System.Windows.Point(touch.X, touch.Y));
+                    System.Windows.Point nowXY = m_StartXY + (parentNow - m_ParentStart);
+                    X = (double)nowXY.X;
+                    m_Y = (double)nowXY.Y;
+
+                    UpdateTransform();
+                    UpdateXY();
+                }
+                if (m_EditTouchId2 == touch.Id && m_EditTouchId1 < -1)
+                {
+                    m_LastT2x = m_Dx2 = touch.X;
+                    m_LastT2y = m_Dy2 = touch.Y;
+                    m_Dr = Rotation;
+                }
+            }
+        }
+
+        private void UpdateTransform()
+        {
+            m_Transform = Matrix.Identity;
+<<<<<<< HEAD
+            m_Transform.Translate(X, m_Y);
+            m_Transform.ScaleAt(scale, scale, X + m_Width / 2, m_Y + m_Height / 2);
+            m_Transform.RotateAt(rotation * 360 / Math.PI / 2, X + rx, m_Y + ry);
+=======
+            m_Transform.Translate(m_X, m_Y);
+            m_Transform.ScaleAt(Scale, Scale, m_X + m_Width / 2, m_Y + m_Height / 2);
+            m_Transform.RotateAt(Rotation * 360 / Math.PI / 2, m_X + Rx, m_Y + Ry);
+>>>>>>> 852858a8c8e8717e0bd288a9358775000bd508c7
+        }
+
+        private void EditUntouched(Vector2 touch)
+        {
+            if (m_EditTouchId1 == touch.Id)
+            {
+                m_EditTouchId1 = -2;
+            }
+            if (m_EditTouchId2 == touch.Id)
+            {
+                m_EditTouchId2 = -2;
+            }
+            if (m_Parent != null && m_Parent.m_MovingItem == this)
+            {
+                m_Parent.m_MovingItem = null;
+            }
+        }
+
+        protected Panel CreateInputLine(string title, object value, out TextBox box, TextChangedEventHandler callback)
+        {
+            var panel = new WrapPanel();
+            var block = new TextBlock();
+            block.Text = title;
+            panel.Children.Add(block);
+            var input = new TextBox();
+            input.Text = value.ToString();
+            input.TextChanged += callback;
+            panel.Children.Add(input);
+            box = input;
+            return panel;
+        }
+
+        protected Panel CreateInputLine(string title, object value, TextChangedEventHandler callback)
+        {
+            var panel = new WrapPanel();
+            var block = new TextBlock();
+            block.Text = title;
+            panel.Children.Add(block);
+            var input = new TextBox();
+            input.Text = value.ToString();
+            input.TextChanged += callback;
+            panel.Children.Add(input);
+            return panel;
+        }
+
+        public void UpdateXY()
+        {
+            if (m_XBox != null)
+            {
+                m_XBox.Dispatcher.Invoke((Action) (() =>
+                {
+                    m_XBox.Text = X.ToString();
+                }));
+            }
+            if (m_YBox != null)
+            {
+                m_YBox.Dispatcher.Invoke((Action)(() =>
+                {
+                    m_YBox.Text = m_Y.ToString();
+                }));
+            }
+            if (m_ScaleBox != null)
+            {
+                m_ScaleBox.Dispatcher.Invoke((Action)(() =>
+                {
+                    m_ScaleBox.Text = Scale.ToString();
+                }));
+            }
+        }
+
+        public virtual void AddControls(Panel panel)
+        {
+            Button button = new Button();
+            button.Content = "Delete";
+            button.MaxWidth = 150;
+            button.Click += (object sender, System.Windows.RoutedEventArgs e) =>
+            {
+                m_Parent.m_Items.Remove(this);
+                panel.Children.Clear();
+            };
+            panel.Children.Add(button);
+
+            panel.Children.Add(CreateInputLine("X", X, out m_XBox, (object sender, TextChangedEventArgs e) =>
+            {
+                try
+                {
+                    X = double.Parse(((TextBox)e.Source).Text);
+                }
+                catch (Exception)
+                {
+
+                }
+            }));
+
+            panel.Children.Add(CreateInputLine("Y", m_Y, out m_YBox, (object sender, TextChangedEventArgs e) =>
+            {
+                try
+                {
+                    m_Y = double.Parse(((TextBox)e.Source).Text);
+                }
+                catch (Exception)
+                {
+
+                }
+            }));
+
+            panel.Children.Add(CreateInputLine("Width", m_Width, (object sender, TextChangedEventArgs e) =>
+            {
+                try
+                {
+                    m_Width = double.Parse(((TextBox)e.Source).Text);
+                }
+                catch (Exception)
+                {
+
+                }
+            }));
+
+            panel.Children.Add(CreateInputLine("Height", m_Height, (object sender, TextChangedEventArgs e) =>
+            {
+                try
+                {
+                    m_Height = double.Parse(((TextBox)e.Source).Text);
+                }
+                catch (Exception)
+                {
+
+                }
+            }));
+
+            panel.Children.Add(CreateInputLine("Rotation", Rotation, (object sender, TextChangedEventArgs e) =>
+            {
+                try
+                {
+                    Rotation = double.Parse(((TextBox)e.Source).Text);
+                }
+                catch (Exception)
+                {
+
+                }
+            }));
+
+            panel.Children.Add(CreateInputLine("RotationCenterX", Rx, (object sender, TextChangedEventArgs e) =>
+            {
+                try
+                {
+                    Rx = double.Parse(((TextBox)e.Source).Text);
+                }
+                catch (Exception)
+                {
+
+                }
+            }));
+
+            panel.Children.Add(CreateInputLine("RotationCenterY", Ry, (object sender, TextChangedEventArgs e) =>
+            {
+                try
+                {
+                    Ry = double.Parse(((TextBox)e.Source).Text);
+                }
+                catch (Exception)
+                {
+
+                }
+            }));
+
+            panel.Children.Add(CreateInputLine("Scale", Scale, out m_ScaleBox, (object sender, TextChangedEventArgs e) =>
+            {
+                try
+                {
+                    Scale = double.Parse(((TextBox)e.Source).Text);
+                }
+                catch (Exception)
+                {
+
+                }
+            }));
+        }
+
+        public void Add(SceneItem item)
+        {
+            m_Items.Add(item);
+        }
+
+        /// <summary>
+        /// removes the given item from being rendered
+        /// </summary>
+        /// <param name="pItem">item to be removed</param>
+        /// <author>Markus Funk</author>
+        public void Remove(SceneItem pItem)
+        {
+            m_Items.Remove(pItem);
+        }
+
+
+        /// <summary>
+        /// This method returns the sceneItem with the given Id.
+        /// 
+        /// If the item is not part of the scene null is returned.
+        /// </summary>
+        /// <param name="pId">id of the string to return</param>
+        /// <returns>the item with the given id or null</returns>
+        /// <author>Markus Funk</author>
+        /// <date>20-01-2014</date>
+        public SceneItem getItemWithId(string pId)
+        {
+            SceneItem ret = null;
+            foreach (SceneItem item in m_Items)
+            {
+                if (String.Compare(item.IdString, pId) == 0)
+                {
+                    ret = item;
+                    break;
+                }
+            }
+
+            return ret;
+        }
+
+        public void SetScene(Scene scene)
+        {
+            this.m_Scene = scene;
+            foreach (var item in m_Items) {
+                item.SetScene(scene);
+            }
+        }
+
+        public virtual void LoadImages()
+        {
+            foreach (var item in m_Items)
+            {
+                item.LoadImages();
+            }
+        }
+
+        public virtual void LoadVideos()
+        {
+            foreach (var item in m_Items)
+            {
+                item.LoadVideos();
+            }
+        }
+
+        public abstract GeometryModel3D GetDrawable();
+
+        public ModelVisual3D GetModelVisual3D()
+        {
+            SceneItemVisual3D itemModelVisual = new SceneItemVisual3D(this);
+            
+            itemModelVisual.Content = GetDrawable();
+
+            foreach (var item in m_Items)
+            {
+                if (item.Visible)
+                {
+                    itemModelVisual.Children.Add(item.GetModelVisual3D());
+                }
+            }
+            return itemModelVisual;
+        }
+
+        /*protected void DrawStart(Painter painter)
+        {
+            painter.PushTransform(new MatrixTransform(m_Transform));
+        }
+
+        protected void DrawEnd(Painter painter)
+        {
+            for (int i = 0; i < m_Items.Count; ++i)
+            {
+                var item = m_Items[i];
+                if (item.Visible)
+                {
+                    item.Draw(painter);
+                }
+            }
+            painter.PopTransform();
+        }
+
+        public virtual void Draw(Painter painter)
+        {
+            DrawStart(painter);
+            DrawEnd(painter);
+        }*/
+
+        /*
+         * Old code by Mayer 2014.11.06
+         * 
+         * public void Save(string filename)
+        {
+            using (var stream = new StreamWriter(filename))
+            {
+                Save(stream);
+            }
+        }
+
+        protected void Save(StreamWriter stream, string name, double value)
+        {
+            stream.Write("\"" + name + "\": " + value);
+        }
+
+        protected void Save(StreamWriter stream, string name, string value)
+        {
+            stream.Write("\"" + name + "\": \"" + value + "\"");
+        }
+
+
+        private static SceneItem Load(SceneItem parent, Json.Value value)
+        {
+            Type type = Type.GetType("motionEAPAdmin." + value["type"].ToString());
+            SceneItem item = (SceneItem)Activator.CreateInstance(type, parent, value);
+            for (int i = 0; i < value["items"].Size(); ++i)
+            {
+                item.Add(Load(item, value["items"][i]));
+            }
+            return item;
+        }
+
+        public static SceneItem Load(string filename)
+        {
+            Json.Data data = new Json.Data(File.ReadAllText(filename));
+            Type type = Type.GetType("motionEAPAdmin." + data["type"].ToString());
+            SceneItem item = (SceneItem)Activator.CreateInstance(type, data.myValue);
+            for (int i = 0; i < data["items"].Size(); ++i)
+            {
+                item.Add(Load(null, data["items"][i]));
+            }
+            return item;
+        }*/
+
+        /// <summary>
+        /// Changes the position of the sceneItem.
+        /// </summary>
+        /// <param name="newX">the new x</param>
+        /// <param name="newY">the new y</param>
+        /// <author>Markus Funk</author>
+        /// <date>10-31-2013</date>
+        public virtual void Move(double newX, double newY)
+        {
+            X = newX;
+            Y = newY;
+        }
+
+        /// <summary>
+        /// Changes the position of the sceneItem by adding the differences to the old position.
+        /// </summary>
+        /// <param name="diffToNewX">x difference to the new x</param>
+        /// <param name="diffToNewY">y difference to the new y</param>
+        /// <author>Michael Matheis</author>
+        /// <date>10-23-2014</date>
+        public virtual void MoveDiff(float diffToNewX, float diffToNewY)
+        {
+            this.Move(X + diffToNewX, Y + diffToNewY);
+        }
+
+        /// <summary>
+        /// Resizes the sceneItem
+        /// </summary>
+        /// <param name="newWidth">new Width</param>
+        /// <param name="newHeight">new Height</param>
+        /// <author>Markus Funk</author>
+        /// <date>10-31-2013</date>
+        public virtual void Resize(double newWidth, double newHeight)
+        {
+            this.m_Width = newWidth;
+            this.m_Height = newHeight;
+        }
+
+        public virtual void Update()
+        {
+            foreach (var item in m_Items)
+            {
+                item.Update();
+            }
+        }
+    }
+}

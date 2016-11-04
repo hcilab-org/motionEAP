@@ -1,0 +1,22 @@
+﻿<Window
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit" x:Class="motionEAPAdmin.GUI.EditBoxDialog"
+        Title="EditBoxDialog" Height="350" Width="400">
+    <Grid>
+        <Button Content="Save" HorizontalAlignment="Left" Margin="284,0,0,23" x:Name="buttonSave" Width="85" Click="buttonSave_Click" Height="25" VerticalAlignment="Bottom" />
+        <Button Content="Cancel" HorizontalAlignment="Left" Margin="186,0,0,23" x:Name="buttonCancel" Width="85" Click="buttonCancel_Click" Height="25" VerticalAlignment="Bottom" />
+        <Label Content="Name:" Height="27" HorizontalAlignment="Left" Margin="13,18,0,0" x:Name="label1" VerticalAlignment="Top" Width="93" />
+        <Label Content="Trigger:" HorizontalAlignment="Left" Margin="13,55,0,87" x:Name="label2" Width="93" />
+        <TextBox Height="25" HorizontalAlignment="Left" Margin="92,20,0,0" x:Name="textBoxBoxName" VerticalAlignment="Top" Width="272" />
+        <TextBox Height="25" HorizontalAlignment="Left" Margin="118,55,0,0" x:Name="textBoxTriggerName" VerticalAlignment="Top" Width="272" />
+        <Label Width="190" Grid.Row="0" Margin="200,85,0,0" HorizontalContentAlignment="Left" HorizontalAlignment="Left" Grid.Column="0" Content="% match offset" Height="31" VerticalAlignment="Top"/>
+        <xctk:IntegerUpDown Grid.Row="0" Margin="119,85,0,0" x:Name="inputMatchPercentageOffset" Height="31" VerticalAlignment="Top" HorizontalAlignment="Left" Width="81" />
+        <Label Width="75" Grid.Row="0" Margin="13,123,0,0" HorizontalContentAlignment="Left" HorizontalAlignment="Left" Grid.Column="0" Content="Z-Value:" Height="31" VerticalAlignment="Top"/>
+        <xctk:IntegerUpDown Grid.Row="0" Margin="119,123,0,0" x:Name="inputZValue" Height="31" VerticalAlignment="Top" HorizontalAlignment="Left" Width="81" />
+        <Label Width="102" Grid.Row="0" Margin="13,161,0,0" HorizontalContentAlignment="Left" HorizontalAlignment="Left" Grid.Column="0" Content="Upper Threshold:" Height="31" VerticalAlignment="Top"/>
+        <Label Width="102" Grid.Row="0" Margin="13,195,0,0" HorizontalContentAlignment="Left" HorizontalAlignment="Left" Grid.Column="0" Content="Lower Threshold:" Height="31" VerticalAlignment="Top"/>
+        <xctk:IntegerUpDown Grid.Row="0" Margin="119,159,0,0" x:Name="inputUpperThreshold" Height="31" VerticalAlignment="Top" HorizontalAlignment="Left" Width="81" />
+        <xctk:IntegerUpDown Grid.Row="0" Margin="120,195,0,0" x:Name="inputLowerThreshold" Height="31" VerticalAlignment="Top" HorizontalAlignment="Left" Width="81" />
+    </Grid>
+</Window>

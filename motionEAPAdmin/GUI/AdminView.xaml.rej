@@ -1,0 +1,14 @@
+diff a/motionEAPAdmin/GUI/AdminView.xaml b/motionEAPAdmin/GUI/AdminView.xaml	(rejected hunks)
+@@ -85,12 +85,6 @@
+                 <TabItem Header="{Binding Source={StaticResource localization}, Path=.[Strings.tabItemAssemblyZone], FallbackValue='#Assembly zone'}" x:Name="tabItemAssemblyZones" x:FieldModifier="protected" >
+                     <GUI:AssemblyZonesPanel x:FieldModifier="protected"  x:Name="m_GUI_AssemblyPanel" Margin="0,0,0,0"/>
+                 </TabItem>
+-                <TabItem x:Name="tabItemPBD" x:FieldModifier="protected" >
+-                    <TabItem.Header>
+-                        <TextBlock Text="{Binding Source={StaticResource localization}, Path=.[Strings.tabItemPBD], FallbackValue='#PBD'}" FontSize="14" Margin="5,5" />
+-                    </TabItem.Header>
+-                    <GUI:PBDPanel x:FieldModifier="protected"  x:Name="m_GUI_PBDPanel" />
+-                </TabItem>
+             </TabControl>
+         </Grid>
+     </DockPanel>

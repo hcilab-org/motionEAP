@@ -1,0 +1,53 @@
+﻿<UserControl x:Class="motionEAPAdmin.GUI.WorkflowPanel"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" 
+             xmlns:helpers="clr-namespace:motionEAPAdmin.Localization"
+             d:DesignHeight="600" d:DesignWidth="800">
+
+    <UserControl.Resources>
+        <helpers:LocalizationHelper x:Key="localization"/>
+    </UserControl.Resources>
+
+    <Grid Margin="0,0,15,15">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="250" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="100"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="40"/>
+        </Grid.RowDefinitions>
+
+        <StackPanel Grid.Row="0" Grid.Column="1" Orientation="Horizontal">
+            <Label Margin="5,5,5,5" Content="{Binding Source={StaticResource localization}, Path=.[Strings.labelCurrentStep], FallbackValue='#Current step'}" />
+            <Label Margin="5,5,5,5" Content="{Binding CurrentWorkingStepNumber, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, FallbackValue='-'}" />
+        </StackPanel>
+        <ListView  Grid.Row="1" Grid.Column="1" Grid.RowSpan="2" Margin="5,5,5,5" x:Name="listViewWorkingStepCarrier" SelectionMode="Single" SelectionChanged="listViewWorkingStepCarrier_SelectionChanged" />
+        <Button x:Name="m_ButtonPrevious" x:FieldModifier="protected" Grid.Row="3" Grid.Column="1" Margin="5,5,5,5" Content="{Binding Source={StaticResource localization}, Path=.[Strings.buttonUp], FallbackValue='#Previous'}" Click="buttonPrevious_Click" />
+        <Button x:Name="m_ButtonNext" x:FieldModifier="protected" Grid.Row="4" Grid.Column="1" Margin="5,5,5,5" Content="{Binding Source={StaticResource localization}, Path=.[Strings.buttonDown], FallbackValue='#Next'}" Click="buttonNext_Click" />
+        <StackPanel Grid.Row="0" Grid.Column="0" Orientation="Horizontal">
+            <Label Margin="5,5,5,5" Content="{Binding Source={StaticResource localization}, Path=.[Strings.labelLoadedWorkflow], FallbackValue='#Loaded workflow'}" />
+            <Label Margin="5,5,5,5" Content="{Binding LoadedWorkflow.Description, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, FallbackValue='-'}" />
+        </StackPanel>
+        <StackPanel Grid.Row="1" Grid.Column="0" Orientation="Horizontal">
+            <Label Margin="5,5,5,5" Content="{Binding Source={StaticResource localization}, Path=.[Strings.labelDescription], FallbackValue='#Description'}" />
+            <TextBlock DockPanel.Dock="Right"  Margin="5,5,5,5" Text="{Binding LoadedWorkflow.Description, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, FallbackValue='-'}" TextWrapping="Wrap" />
+        </StackPanel>
+        <StackPanel Grid.Row="2" Grid.Column="0" Orientation="Horizontal" Grid.RowSpan="1" VerticalAlignment="Center" HorizontalAlignment="Center">
+            <Button Content="{Binding .[Strings.buttonStartAssembly], FallbackValue=#Start assembly, Source={StaticResource localization}}" Height="104" HorizontalAlignment="Left" Margin="5,5,5,5" x:Name="m_ButtonStartWorkflow" VerticalAlignment="Top" Width="214" Click="startWorkflowButton_Click" />
+            <Button Content="{Binding .[Strings.buttonQuitAssembly], FallbackValue=#Quit assembly, Source={StaticResource localization}}" Height="104" HorizontalAlignment="Left" Margin="5,5,5,5" x:Name="m_ButtonStopWorkflow" VerticalAlignment="Top" Width="214" Click="stopWorkflowButton_Click"/>
+        </StackPanel>
+        <ComboBox HorizontalAlignment="Left" Name="m_ComboboxAdaptivityLevel" Margin="10,13,0,0" Grid.Row="4" VerticalAlignment="Top" Width="120" ItemsSource="{Binding Path=AdaptivityLevels}" DisplayMemberPath="Name" SelectedValuePath="Id" SelectedValue="{Binding Path=AdaptivityLevelId}"></ComboBox>
+        <Label Content="Adaptivity level" HorizontalAlignment="Left" Margin="6,32,0,0" Grid.Row="3" VerticalAlignment="Top" Grid.RowSpan="2" Height="25" FontSize="11"/>
+        <Label Margin="165,10,273,0" Content="{Binding .[Strings.labelPartsProduced], FallbackValue=#PartsProduced, Source={StaticResource localization}}" Grid.Row="4" Padding="5" />
+        <Label Margin="135,10,0,0" x:Name="m_OutputProducedParts" Content="{Binding SelfStatus.ProducedParts, FallbackValue=-, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" HorizontalContentAlignment="Right" Grid.Row="4" HorizontalAlignment="Left" Width="30" />
+        <Button x:Name="m_buttonResetPartsProduced" Content="Set to 0" HorizontalAlignment="Left" Margin="273,13,0,0" Grid.Row="4" VerticalAlignment="Top" Width="75" Click="m_buttonResetPartsProduced_Click" Padding="1"/>
+        <Label Content="Server Info" HorizontalAlignment="Left" Margin="138,32,0,0" Grid.Row="3" VerticalAlignment="Top" Grid.RowSpan="2" Height="25" FontSize="11"/>
+    </Grid>
+</UserControl>

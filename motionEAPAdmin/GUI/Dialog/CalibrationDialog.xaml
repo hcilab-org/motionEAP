@@ -1,0 +1,40 @@
+﻿<Window x:Class="motionEAPAdmin.GUI.CalibrationDialog"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        x:Name="m_Calibration" 
+        Title="Calibration Dialog" Height="540" Width="720" Loaded="WindowLoaded" Closed="WindowClosed" Cursor="Cross"
+        xmlns:helpers="clr-namespace:motionEAPAdmin.Localization">
+
+    <Window.Resources>
+        <helpers:LocalizationHelper x:Key="localization"/>
+    </Window.Resources>
+
+    <Grid Cursor="Cross">
+        <Menu DockPanel.Dock="Top">
+            <MenuItem Header="{Binding Source={StaticResource localization}, Path=.[Strings.buttonSave], FallbackValue='#Save'}" Click="Save_Click"/>
+            <MenuItem Header="{Binding Source={StaticResource localization}, Path=.[Strings.menuItemClose], FallbackValue='#Close'}" Click="Close_Click"/>
+            <RadioButton Content="{Binding Source={StaticResource localization}, Path=.[Strings.radioButtonDrawingArea], FallbackValue='#Drawing area'}" IsChecked="True" Height="25" HorizontalAlignment="Left" Margin="0,0,0,0" Name="radioWButtonDrawing" VerticalAlignment="Top" Checked="radioWButtonDrawing_Checked" />
+            <RadioButton Content="{Binding Source={StaticResource localization}, Path=.[Strings.radioButtonAssemblyArea], FallbackValue='#Assembly area'}" Height="25" HorizontalAlignment="Left" Margin="0,0,0,0" Name="radioButtonAssembly" VerticalAlignment="Top" Checked="radioButtonAssembly_Checked"/>
+            <Label>
+                <CheckBox x:Name="m_CbCheckerboard" Content="Show Checkerboard" Checked="m_CbCheckerboard_Checked" Unchecked="m_CbCheckerboard_Unchecked"/>
+            </Label>
+        </Menu>
+        <Viewbox Name="m_Viewbox" Margin="0,26,0,30">
+            <Image Name="m_Image" Cursor="Cross" HorizontalAlignment="Right" Margin="0,0,0,0"
+                   MouseLeftButtonUp="m_Image_MouseLeftButtonUp" MouseLeftButtonDown="m_Image_MouseLeftButtonDown" MouseMove="m_Image_MouseMove"/>
+        </Viewbox>
+        <Grid Margin="0,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Bottom" Width="712">
+            <Label Content="PCamPosition:" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+            <Label Content="X:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="90,0,0,0"/>
+            <TextBox x:Name="m_TbProjCamPositionX" HorizontalAlignment="Left" Height="23" Margin="110,3,0,0" TextWrapping="Wrap" Text="{Binding Path=ProjCamPosition.X}" VerticalAlignment="Top" Width="95" IsEnabled="False"/>
+            <Label Content="Y:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="205,0,0,0"/>
+            <TextBox x:Name="m_TbProjCamPositionY" HorizontalAlignment="Left" Height="23" Margin="224,3,0,0" TextWrapping="Wrap" Text="{Binding Path=ProjCamPosition.Y}" VerticalAlignment="Top" Width="95" IsEnabled="False"/>
+            <Label Content="Z:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="319,0,0,0"/>
+            <TextBox x:Name="m_TbProjCamPositionZ" HorizontalAlignment="Left" Height="23" Margin="338,3,0,0" TextWrapping="Wrap" Text="{Binding Path=ProjCamPosition.Z}" VerticalAlignment="Top" Width="95" IsEnabled="False"/>
+            <Label Content="A:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="459,0,0,0"/>
+            <TextBox x:Name="m_TbProjLookDirectionY" HorizontalAlignment="Left" Height="23" Margin="479,3,0,0" TextWrapping="Wrap" Text="{Binding Path=ProjCamLookDirection.Y}" VerticalAlignment="Top" Width="80" IsEnabled="False"/>
+            <Label Content="FOV:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="575,0,0,0"/>
+            <TextBox x:Name="m_TbProjCamFOV" HorizontalAlignment="Right" Height="23" Margin="0,3,10,0" TextWrapping="Wrap" Text="{Binding Path=ProjCamFOV}" VerticalAlignment="Top" Width="92" IsEnabled="False"/>
+        </Grid>
+    </Grid>
+</Window>

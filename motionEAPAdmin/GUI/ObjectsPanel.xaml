@@ -1,0 +1,88 @@
+﻿<UserControl x:Class="motionEAPAdmin.GUI.ObjectsPanel"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d"
+             xmlns:helpers="clr-namespace:motionEAPAdmin.Localization"
+             d:DesignHeight="600" d:DesignWidth="800">
+
+    <UserControl.Resources>
+        <helpers:LocalizationHelper x:Key="localization"/>
+    </UserControl.Resources>
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="250"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <StackPanel x:Name="m_TopBar" x:FieldModifier="protected" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2"  Orientation="Horizontal" Margin="5,5,5,5">
+            <CheckBox Margin="5,5,5,5" IsChecked="{Binding ObjectsVisualFeedbackDisplay, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Content="{Binding Source={StaticResource localization}, Path=.[Strings.checkboxDisplayVisualFeedback], FallbackValue='#Display visual feedback'}"  VerticalContentAlignment="Center"/>
+            <CheckBox Margin="5,5,5,5" IsChecked="{Binding ObjectsVisualFeedbackProject, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Content="{Binding Source={StaticResource localization}, Path=.[Strings.checkboxProjectVisualFeedback], FallbackValue='#Project visual feedback'}"  VerticalContentAlignment="Center"/>
+            <CheckBox Margin="5,5,5,5" IsChecked="{Binding ObjectsRecognizeObject, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Content="{Binding Source={StaticResource localization}, Path=.[Strings.checkboxRecognizeObjects], FallbackValue='#Recognize objects'}" VerticalContentAlignment="Center"/>
+            <Label Margin="5,5,5,5" Content="{Binding Source={StaticResource localization}, Path=.[Strings.labelName], FallbackValue='#Name:'}" />
+            <TextBox Margin="5,5,5,5" x:Name="textBoxName" x:FieldModifier="protected" Width="150" />
+            <Button Margin="5,5,5,5" Content="{Binding Source={StaticResource localization}, Path=.[Strings.buttonSaveDetectionZoneLayout], FallbackValue='#Save detection zonelayout'}" Click="buttonSaveBoxObjectLayout_Click" />
+            <Button Margin="5,5,5,5" Content="{Binding Source={StaticResource localization}, Path=.[Strings.buttonLoadDetectionZoneLayout], FallbackValue='#Load detection zonelayout'}" Click="buttonLoadBoxObjectLayout_Click" />
+
+            <Button Margin="5,5,5,5" Content="{Binding Source={StaticResource localization}, Path=.[Strings.buttonScreenshot], FallbackValue='#Screenshot'}" Click="buttonObjectScreenShot_Click" IsEnabled="True"/>
+
+        </StackPanel>
+        <Viewbox Grid.Row="1" Grid.Column="0" x:Name="imageViewbox" x:FieldModifier="protected"  Margin="5,5,5,5" MouseMove="image_MouseMove" MouseUp="image_MouseUp" MouseLeftButtonDown="image_MouseDown">
+            <Image x:Name="image" x:FieldModifier="protected" />
+        </Viewbox>
+        <DockPanel Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2" Margin="5,5,5,5">
+            <ListView Margin="5,5,5,5" x:Name="m_ObjectsListView" x:FieldModifier="protected" ItemsSource="{Binding Objects, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" MouseDoubleClick="ObjectsListView_MouseDoubleClick">
+                <ListView.View>
+                    <GridView>
+                        <GridViewColumn Header="Image">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Grid>
+                                        <Image Source="{Binding ImageFullPath}" />
+                                    </Grid>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+                        <GridViewColumn Header="{Binding Source={StaticResource localization}, Path=.[Strings.listViewMessage], FallbackValue='#Message'}" DisplayMemberBinding="{Binding Name}" />
+                        <GridViewColumn Header="{Binding Source={StaticResource localization}, Path=.[Strings.listViewGroup], FallbackValue='#Group'}" DisplayMemberBinding="{Binding Category}" />
+                        <GridViewColumn Header="Id" DisplayMemberBinding="{Binding Id}" />
+                        <GridViewColumn Header="{Binding Source={StaticResource localization}, Path=.[Strings.listViewPath], FallbackValue='#Path'}" DisplayMemberBinding="{Binding Image}" />
+                    </GridView>
+                </ListView.View>
+                <ListView.ContextMenu>
+                    <ContextMenu>
+                        <MenuItem Header="{Binding Source={StaticResource localization}, Path=.[Strings.buttonDelete], FallbackValue='#Delete'}" Click="Menuitem_Delete_Click"/>
+                    </ContextMenu>
+                </ListView.ContextMenu>
+            </ListView>
+        </DockPanel>
+
+
+
+        <DockPanel Grid.Row="1" Grid.Column="1">
+            <ListBox x:Name="m_ListBoxObjects" x:FieldModifier="protected" Margin="5,5,5,5" ItemsSource="{Binding ObjectDetectionZones, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock Text="{Binding Name}" Width="100">
+                            <TextBlock.ContextMenu>
+                                <ContextMenu>
+                                    <MenuItem Click="MenuItem_EditSelectedBoxObject" Header="{Binding Source={StaticResource localization}, Path=.[Strings.menuItemEdit], FallbackValue='#Edit'}" />
+                                    <MenuItem Click="MenuItem_DeleteSelectedObjectDetectionZone" Header="{Binding Source={StaticResource localization}, Path=.[Strings.menuItemDelete], FallbackValue='#Delete'}" />
+                                </ContextMenu>
+                            </TextBlock.ContextMenu>
+                        </TextBlock>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+        </DockPanel>
+        
+        
+    </Grid>
+</UserControl>

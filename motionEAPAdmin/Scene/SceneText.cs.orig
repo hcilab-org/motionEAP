@@ -1,0 +1,106 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.IO;
+using System.Windows.Controls;
+using motionEAPAdmin.Backend;
+using System.Windows.Media;
+using System.Runtime.Serialization;
+using System.Windows;
+
+namespace motionEAPAdmin.Scene
+{
+    [Serializable()]
+    public class SceneText : SceneItem, ISerializable
+    {
+        private int m_SerVersion = 1;
+
+        public string m_Text;
+        public FontFamily m_FontFamily;
+        public double m_FontSize;
+        public System.Windows.Media.Color m_Color;
+
+        public SceneText(SceneItem parent, double x, double y, string text, System.Windows.Media.Color pColor, double pFontSize, FontFamily pFontFamily, double rotation = 0, double rotationCenterX = 0, double rotationCenterY = 0, double scale = 1.0f)
+            : base(parent, x, y, 0.1, 0.1, rotation, rotationCenterX, rotationCenterY, scale)
+        {
+            this.m_Text = text;
+            this.m_FontFamily = pFontFamily;
+            this.m_Color = pColor;
+            m_FontSize = pFontSize;
+            //MeasureSize();
+        }
+
+        public SceneText()
+        {
+        }
+
+        protected SceneText(SerializationInfo info, StreamingContext context)
+            : base(info, context)
+        {
+            int pSerVersion = info.GetInt32("m_SerVersion");
+
+            if (pSerVersion < 1)
+                return;
+
+            m_Text = info.GetString("m_Text");
+            m_FontFamily = (FontFamily)info.GetValue("m_FontFamily", typeof(FontFamily));
+            m_FontSize = info.GetDouble("m_FontSize");
+            m_Color = (Color)info.GetValue("m_Color", typeof(Color));
+        }
+
+        public void GetObjectData(SerializationInfo info, StreamingContext context)
+        {
+            base.GetObjectData(info, context);
+
+            info.AddValue("m_SerVersion", m_SerVersion);
+
+            info.AddValue("m_Text", m_Text);
+            info.AddValue("m_FontFamily", m_FontFamily);
+            info.AddValue("m_FontSize", m_FontSize);
+            info.AddValue("m_Color", m_Color);
+        }
+        
+        public override System.Windows.Media.Media3D.GeometryModel3D GetDrawable()
+        {
+<<<<<<< HEAD
+            return HciLab.Utilities.Mash3D.Text3D.CreateTextLabel(X, Y, m_Text, m_Color, m_FontSize);
+=======
+            return HciLab.Utilities.Mash3D.Text3D.CreateTextLabel(m_X, m_Y, m_Text, m_Color, m_FontSize, m_FontFamily);
+>>>>>>> 852858a8c8e8717e0bd288a9358775000bd508c7
+        }
+
+        /*private void MeasureSize()
+        {
+<<<<<<< HEAD
+            Width = m_Font.WidthOf(m_Text) * ScreenManager.getProjectorResolution().Width;
+            Height = m_Font.Height * ScreenManager.getProjectorResolution().Height;
+        }
+=======
+            m_Width = m_Font.WidthOf(m_Text) * ScreenManager.getProjectorResolution().Width;
+            m_Height = m_Font.Height * ScreenManager.getProjectorResolution().Height;
+        }*/
+>>>>>>> 852858a8c8e8717e0bd288a9358775000bd508c7
+
+        public override void AddControls(System.Windows.Controls.Panel panel)
+        {
+            base.AddControls(panel);
+            panel.Children.Add(CreateInputLine("Text", m_Text, (object sender, TextChangedEventArgs e) =>
+            {
+                m_Text = ((TextBox)e.Source).Text;
+                //MeasureSize();
+            }));
+            panel.Children.Add(CreateInputLine("Color", m_Color, (object sender, TextChangedEventArgs e) =>
+            {
+                try
+                {
+                    m_Color = ColorTransformer.fromString(((TextBox)e.Source).Text);
+                }
+                catch (Exception)
+                {
+
+                }
+            }));
+        }
+    }
+}
