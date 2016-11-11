@@ -161,7 +161,7 @@ namespace HciLab.Kinect
                 {
                     if (frame.IsValid)
                     {
-                        VideoFrameRef.CopyBitmapOptions options = VideoFrameRef.CopyBitmapOptions.None | VideoFrameRef.CopyBitmapOptions.Force24BitRgb;
+                        VideoFrameRef.CopyBitmapOptions options = VideoFrameRef.CopyBitmapOptions.None | VideoFrameRef.CopyBitmapOptions.Force24BitRgb | VideoFrameRef.CopyBitmapOptions.DepthFillShadow;
                         lock (this.m_Bitmap)
                         {
                             try

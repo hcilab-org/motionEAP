@@ -47,8 +47,8 @@ namespace HciLab.Kinect
     public class KinectManager
     {
 
-        public static Int16 SCALE_FACTOR = Int16.MaxValue / 1500;
-
+        //public static Int16 SCALE_FACTOR = Int16.MaxValue / 1500;
+        public static Int16 SCALE_FACTOR = 1;
         public static readonly string VIDEO_DIR = "Video";
 
         private static KinectManager instance;

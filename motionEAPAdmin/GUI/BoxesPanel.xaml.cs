@@ -129,7 +129,7 @@ namespace motionEAPAdmin.GUI
 
         private void createANewObj(object sender, MouseButtonEventArgs e)
         {
-            Image<Gray, Int32> img = KinectManager.Instance.GetCurrentDepthImage();
+            Image<Gray, Int32> img = HciLab.Kinect.CameraManager.Instance.DepthImage;
             int boxX = (int)e.GetPosition(image).X;
             int boxY = (int)e.GetPosition(image).Y;
 
@@ -188,7 +188,7 @@ namespace motionEAPAdmin.GUI
         private double calculateCurrentMeanDepth(Box b)
         {
 
-            Image<Gray, Int32> depthImg = KinectManager.Instance.GetCurrentDepthImage();
+            Image<Gray, Int32> depthImg = HciLab.Kinect.CameraManager.Instance.DepthImage;
 
             int count = 0;
             double sum = 0;
@@ -199,6 +199,7 @@ namespace motionEAPAdmin.GUI
                     // freaking img.Data is y,x,0
                     int depthval = depthImg.Data[y, x, 0];
                     int real_depthval = depthval / KinectManager.SCALE_FACTOR;
+
                     if (real_depthval != 0)
                     {
                         sum = sum + real_depthval;

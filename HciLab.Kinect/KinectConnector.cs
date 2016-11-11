@@ -204,7 +204,9 @@ namespace HciLab.Kinect
         public void OnAllFramesReady(object pSource, Image<Bgra, Byte> pColorFrame, Image<Gray, Int16> pDepthFrame)
         {
             if (this.allFramesReady != null)
+            {
                 allFramesReady(pSource, pColorFrame, pDepthFrame);
+            }
         }
     }
 }

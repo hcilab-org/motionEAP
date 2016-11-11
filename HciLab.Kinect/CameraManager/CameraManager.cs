@@ -32,6 +32,7 @@ using System;
 using Emgu.CV;
 using Emgu.CV.Structure;
 using System.IO;
+using System.Windows.Threading;
 
 namespace HciLab.Kinect
 {
@@ -128,7 +129,8 @@ namespace HciLab.Kinect
                 Console.WriteLine("Ensenso Library not found: Have you installed the Ensenso SDK?");
             }
 
-            KinectManager.Instance.KinectConnector.allFramesReady -= KinectManager.Instance.m_KinectConnector_allFramesReady;
+            //KinectManager.Instance.KinectConnector.allFramesReady -= KinectManager.Instance.m_KinectConnector_allFramesReady;
+
             OpenNIManager.Instance.initAndStart(deviceName);
             SelectedCameraInterface = "OpenNI";
         }

@@ -33,9 +33,12 @@ using Emgu.CV.Structure;
 using HciLab.Kinect;
 using HciLab.Utilities;
 using motionEAPAdmin.ContentProviders;
+using motionEAPAdmin.GUI;
 using motionEAPAdmin.Scene;
+using System;
 using System.ComponentModel;
 using System.Drawing;
+using System.Windows.Threading;
 
 namespace motionEAPAdmin.Backend.Boxes
 {
@@ -91,7 +94,8 @@ namespace motionEAPAdmin.Backend.Boxes
         /// </summary>
         private BoxManager()
         {
-            KinectManager.Instance.allFramesReady += refreshTrigger;
+            //KinectManager.Instance.allFramesReady += refreshTrigger;
+            HciLab.Kinect.CameraManager.Instance.OnAllFramesReady += refreshTrigger;
         }
 
         private void NotifyPropertyChanged(string Obj)
@@ -183,6 +187,7 @@ namespace motionEAPAdmin.Backend.Boxes
                     }
                 }
             }
+
         }
 
         private double getPercentageWithinMeanBoundries(double depthmean, Box b, Image<Gray, int> pDepthPixel)
@@ -201,6 +206,7 @@ namespace motionEAPAdmin.Backend.Boxes
                     int depthval = pDepthPixel.Data[y, x, 0];
                     int offsetZ = 0; // (int)((double)(b.Z / KinectManager.SCALE_FACTOR) - depthmean);
                     int real_depthval = depthval / KinectManager.SCALE_FACTOR;
+
                     if ((real_depthval > (offsetZ + b.Depthmean - b.UpperThreshold)) && (real_depthval < (offsetZ + b.Depthmean - b.LowerThreshold)))
                     {
                         within = within + 1;
@@ -216,7 +222,7 @@ namespace motionEAPAdmin.Backend.Boxes
 
         private double calculateCurrentMeanDepth(Box b)
         {
-            Image<Gray, int> depthPixel = KinectManager.Instance.GetCurrentDepthImage();
+            Image<Gray, int> depthPixel = HciLab.Kinect.CameraManager.Instance.DepthImage;
             long sum = 0;
             int count = 0;
             for (int x = b.X; x < b.Width + b.X; x++)
@@ -224,7 +230,9 @@ namespace motionEAPAdmin.Backend.Boxes
                 for (int y = b.Y; y < b.Height + b.Y; y++)
                 {
                     int depthval = depthPixel.Data[y, x, 0];
-                    int real_depthval = depthval / KinectManager.SCALE_FACTOR;
+                    int real_depthval = 0;
+                    real_depthval = depthval / KinectManager.SCALE_FACTOR;
+
                     if (real_depthval != 0)
                     {
                         sum = sum + real_depthval;
